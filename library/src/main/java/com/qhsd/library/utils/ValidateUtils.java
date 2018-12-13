@@ -20,8 +20,8 @@ public class ValidateUtils {
     /**
      * 检查字符在某个区间
      * @param text 需要检查的字符串
-     * @param min 最小区间（不包含）
-     * @param max 最大区间（不包含）
+     * @param min 最小区间（包含）
+     * @param max 最大区间（包含）
      * @return 正确：true，不正确：false
      */
     public static boolean checkLengthInterval(String text, int min, int max){

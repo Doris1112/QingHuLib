@@ -40,14 +40,14 @@ public abstract class IOkHttpManager {
      *
      * @return 基础地址
      */
-    abstract String getBaseUrl();
+    public abstract String getBaseUrl();
 
     /**
      * 下载保存目录
      *
      * @return 下载保存目录
      */
-    abstract String getDownloadSavePath();
+    public abstract String getDownloadSavePath();
 
     /**
      * mediaType 这个需要和服务端保持一致
@@ -464,9 +464,13 @@ public abstract class IOkHttpManager {
     private String getUserAgent() {
         try {
             String userAgent;
-            try {
-                userAgent = WebSettings.getDefaultUserAgent(mContext);
-            } catch (Exception e) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+                try {
+                    userAgent = WebSettings.getDefaultUserAgent(mContext);
+                } catch (Exception e) {
+                    userAgent = System.getProperty("http.agent");
+                }
+            } else {
                 userAgent = System.getProperty("http.agent");
             }
             StringBuilder sb = new StringBuilder();
