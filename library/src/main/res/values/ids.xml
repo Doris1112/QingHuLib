@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <resources>
     <item type="id" name="tag_recycler_holder"/>
+    <item type="id" name="linear_tab"/>
+    <item type="id" name="divide_tab"/>
+    <item type="id" name="viewpager_tab"/>
 </resources>
