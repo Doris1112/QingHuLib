@@ -6,5 +6,9 @@
     <string name="lib_download_progress">下载进度</string>
     <string name="lib_sure">确认</string>
     <string name="lib_cancel">取消</string>
+    <string name="lib_data_empty">暂无相关内容</string>
+    <string name="lib_data_no_more">没有更多了</string>
+    <string name="lib_net_error">网络不给力，点击重试</string>
+    <string name="lib_loading">拼命加载中……</string>
 
 </resources>
