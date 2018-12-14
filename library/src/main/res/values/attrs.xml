@@ -25,15 +25,6 @@
         <attr name="enableScaleAnim" format="boolean"/>
     </declare-styleable>
 
-    <declare-styleable name="RoundedImageView">
-        <attr name="corner_radius" format="dimension" />
-        <attr name="border_width2" format="dimension" />
-        <attr name="border_color2" format="color" />
-        <attr name="mutate_background" format="boolean" />
-        <attr name="oval" format="boolean" />
-        <attr name="android:scaleType" />
-    </declare-styleable>
-
     <declare-styleable name="CodeEditView">
         <attr name="textColor" format="color"/>
         <attr name="textSize" format="integer"/>
