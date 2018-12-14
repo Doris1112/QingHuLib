@@ -38,7 +38,7 @@ public class NotificationDownloadUtils {
         }
         notificationId++;
         mDownloads.add(downloadUrl);
-
+        ToastUtils.showToastCenter(mContext, "开始下载...");
         final NotificationCompat.Builder builder = new NotificationCompat.Builder(mContext)
                 .setContentText(fileName)
                 .setSmallIcon(mIcon)
@@ -51,8 +51,10 @@ public class NotificationDownloadUtils {
                 okHttpManager.downloadFile(downloadUrl, fileName, new OkHttpDownloadBack() {
                     @Override
                     public void onDownloading(int progress) {
-                        builder.setProgress(100, progress, false);
-                        mNotificationManager.notify(notificationId, builder.build());
+                        if (progress % 10 == 0){
+                            builder.setProgress(100, progress, false);
+                            mNotificationManager.notify(notificationId, builder.build());
+                        }
                     }
 
                     @Override
