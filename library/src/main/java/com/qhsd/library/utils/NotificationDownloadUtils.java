@@ -2,7 +2,6 @@ package com.qhsd.library.utils;
 
 import android.app.NotificationManager;
 import android.content.Context;
-import android.graphics.BitmapFactory;
 import android.support.v4.app.NotificationCompat;
 
 import com.qhsd.library.helper.thread.CustomThreadExecutor;
@@ -10,10 +9,8 @@ import com.qhsd.library.requster.IOkHttpManager;
 import com.qhsd.library.requster.OkHttpDownloadBack;
 
 import java.io.File;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Doris.
@@ -26,7 +23,7 @@ public class NotificationDownloadUtils {
     private int mIcon;
     private NotificationManager mNotificationManager;
 
-    private static Map<String, Integer> mDownloads = new HashMap<>();
+    private static List<String> mDownloads = new ArrayList<>();
     private static int notificationId = 0;
 
     public NotificationDownloadUtils(Context context, int icon) {
@@ -40,17 +37,15 @@ public class NotificationDownloadUtils {
             return;
         }
         notificationId++;
-        mDownloads.put(downloadUrl, notificationId);
+        mDownloads.add(downloadUrl);
 
         final NotificationCompat.Builder builder = new NotificationCompat.Builder(mContext)
                 .setContentText(fileName)
                 .setSmallIcon(mIcon)
-                .setLargeIcon(BitmapFactory.decodeResource(mContext.getResources(), mIcon))
                 .setTicker("下载通知")
-                .setProgress(100, 0, false)
-                .setAutoCancel(true);
+                .setProgress(100, 0, false);
         mNotificationManager.notify(notificationId, builder.build());
-        new Timer().schedule(new TimerTask() {
+        new CustomThreadExecutor(true).execute(new Runnable() {
             @Override
             public void run() {
                 okHttpManager.downloadFile(downloadUrl, fileName, new OkHttpDownloadBack() {
@@ -75,7 +70,7 @@ public class NotificationDownloadUtils {
                     }
                 });
             }
-        }, 0);
+        });
     }
 
     /**
@@ -85,7 +80,7 @@ public class NotificationDownloadUtils {
      * @return 是：true， 否：false
      */
     private boolean isDownloading(String url) {
-        if (mDownloads.containsKey(url)) {
+        if (mDownloads.contains(url)) {
             ToastUtils.showToastCenter(mContext, "后台正在下载..");
             return true;
         }
