@@ -27,6 +27,22 @@ public class ProgressDialogUtil {
         contentView.setText(content);
         mDialog = new Dialog(context);
         mDialog.setContentView(view);
+        mDialog.setCanceledOnTouchOutside(false);
+        Window window = mDialog.getWindow();
+        if (window != null) {
+            window.setGravity(Gravity.CENTER);
+            mDialog.show();
+        }
+    }
+
+    public static void showDialog(final Context context) {
+        if (mDialog != null && mDialog.isShowing()) {
+            mDialog.dismiss();
+        }
+        View view = LayoutInflater.from(context).inflate(R.layout.lib_dialog_progress, null);
+        mDialog = new Dialog(context);
+        mDialog.setContentView(view);
+        mDialog.setCanceledOnTouchOutside(false);
         Window window = mDialog.getWindow();
         if (window != null) {
             window.setGravity(Gravity.CENTER);

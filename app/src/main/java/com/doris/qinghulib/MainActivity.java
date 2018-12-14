@@ -27,6 +27,9 @@ public class MainActivity extends AppCompatActivity {
             case R.id.button2:
                 ProgressDialogUtil.showDialog(this, "123");
                 break;
+            case R.id.button3:
+                ProgressDialogUtil.showDialog(this);
+                break;
             default:
                 break;
         }
