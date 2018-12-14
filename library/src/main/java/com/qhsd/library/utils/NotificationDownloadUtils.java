@@ -12,6 +12,8 @@ import com.qhsd.library.requster.OkHttpDownloadBack;
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * @author Doris.
@@ -48,7 +50,7 @@ public class NotificationDownloadUtils {
                 .setProgress(100, 0, false)
                 .setAutoCancel(true);
         mNotificationManager.notify(notificationId, builder.build());
-        new CustomThreadExecutor(true).execute(new Runnable() {
+        new Timer().schedule(new TimerTask() {
             @Override
             public void run() {
                 okHttpManager.downloadFile(downloadUrl, fileName, new OkHttpDownloadBack() {
@@ -73,7 +75,7 @@ public class NotificationDownloadUtils {
                     }
                 });
             }
-        });
+        }, 0);
     }
 
     /**
