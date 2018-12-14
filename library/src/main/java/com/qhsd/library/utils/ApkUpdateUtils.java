@@ -2,6 +2,7 @@ package com.qhsd.library.utils;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +16,8 @@ import com.qhsd.library.requster.IOkHttpManager;
 import com.qhsd.library.requster.OkHttpDownloadBack;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Doris
@@ -26,9 +29,20 @@ public class ApkUpdateUtils implements OkHttpDownloadBack {
     private Dialog mDownloadDialog;
     private TextView mProgressValue;
     private ProgressBar mProgress;
+    private boolean mIsBackstageDownload = false;
+    private boolean mIsDownload = false;
+    private boolean mIsUpdate = true;
 
-    public ApkUpdateUtils(Activity activity) {
+    private static List<String> mDownloadUrls = new ArrayList<>();
+
+    public ApkUpdateUtils(Activity activity, boolean isUpdate) {
+        this(activity, isUpdate, false);
+    }
+
+    public ApkUpdateUtils(Activity activity, boolean isUpdate, boolean isBackstageDownload) {
         mActivity = activity;
+        mIsUpdate = isUpdate;
+        mIsBackstageDownload = isBackstageDownload;
     }
 
     /**
@@ -36,17 +50,19 @@ public class ApkUpdateUtils implements OkHttpDownloadBack {
      *
      * @param downloadUrl  下载地址
      * @param contentValue 更新内容
-     * @param NeedUpdate   是否需要强制更新
+     * @param fileName     文件名称
+     * @param needUpdate   是否需要强制更新
+     * @param httpManager  请求
      */
-    public void updateDialog(final String downloadUrl, String contentValue, boolean NeedUpdate,
-                             final IOkHttpManager httpManager) {
+    public void showUpdateMessageDialog(final String downloadUrl, String contentValue, final String fileName,
+                                        boolean needUpdate, final IOkHttpManager httpManager) {
         try {
             final Dialog dialog = new Dialog(mActivity);
             View view = LayoutInflater.from(mActivity).inflate(R.layout.lib_dialog_update_apk, null);
             dialog.setContentView(view);
             dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
-            dialog.setCanceledOnTouchOutside(!NeedUpdate);
-            dialog.setCancelable(!NeedUpdate);
+            dialog.setCanceledOnTouchOutside(!needUpdate);
+            dialog.setCancelable(!needUpdate);
             WindowManager m = mActivity.getWindowManager();
             DisplayMetrics outMetrics = new DisplayMetrics();
             m.getDefaultDisplay().getMetrics(outMetrics);
@@ -61,15 +77,46 @@ public class ApkUpdateUtils implements OkHttpDownloadBack {
             view.findViewById(R.id.lib_update_apk_sure).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    httpManager.downloadFile(downloadUrl, ApkUpdateUtils.this);
-                    dialog.dismiss();
-                    downloadDialog();
+                    if (!isDownloading(downloadUrl)){
+                        mDownloadUrls.add(downloadUrl);
+                        httpManager.downloadFile(downloadUrl, fileName, ApkUpdateUtils.this);
+                        dialog.dismiss();
+                        downloadDialog();
+                    }
                 }
             });
             dialog.show();
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * 显示下载进度对话框
+     *
+     * @param downloadUrl 下载地址
+     * @param fileName    文件名称
+     * @param httpManager 请求
+     */
+    public void showDownloadProgressDialog(String downloadUrl, String fileName, IOkHttpManager httpManager) {
+        if (!isDownloading(downloadUrl)){
+            mDownloadUrls.add(downloadUrl);
+            httpManager.downloadFile(downloadUrl, fileName, ApkUpdateUtils.this);
+            downloadDialog();
+        }
+    }
+
+    /**
+     * 是否正在下载
+     * @param url 下载地址
+     * @return 是：true， 否：false
+     */
+    private boolean isDownloading(String url){
+        if (mDownloadUrls.contains(url)){
+            ToastUtils.showToastCenter(mActivity, "后台正在下载..");
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -80,8 +127,16 @@ public class ApkUpdateUtils implements OkHttpDownloadBack {
         View view = LayoutInflater.from(mActivity).inflate(R.layout.lib_dialog_download_progress, null);
         mDownloadDialog.setContentView(view);
         mDownloadDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
-        mDownloadDialog.setCanceledOnTouchOutside(false);
-        mDownloadDialog.setCancelable(false);
+        mDownloadDialog.setCanceledOnTouchOutside(mIsBackstageDownload);
+        mDownloadDialog.setCancelable(mIsBackstageDownload);
+        mDownloadDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog) {
+                if (mIsDownload && mIsBackstageDownload) {
+                    ToastUtils.showToastCenter(mActivity, "进入后台下载！");
+                }
+            }
+        });
         WindowManager m = mActivity.getWindowManager();
         DisplayMetrics outMetrics = new DisplayMetrics();
         m.getDefaultDisplay().getMetrics(outMetrics);
@@ -114,6 +169,7 @@ public class ApkUpdateUtils implements OkHttpDownloadBack {
     @Override
     public void onDownloading(int progress) {
         try {
+            mIsDownload = true;
             updateDownloadDialog(progress);
         } catch (Exception e) {
             e.printStackTrace();
@@ -121,23 +177,28 @@ public class ApkUpdateUtils implements OkHttpDownloadBack {
     }
 
     @Override
-    public void onDownloadSuccess(File file) {
+    public void onDownloadSuccess(File file, String fileUrl, String fileName) {
         try {
+            mIsDownload = false;
+            downloadDialogDismiss();
+            mDownloadUrls.remove(fileUrl);
             ApkUtils.installAPK(file, mActivity);
-            AppManager.getAppManager().finishAllActivity();
+            if (mIsUpdate) {
+                AppManager.getAppManager().finishAllActivity();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     @Override
-    public void onDownloadFailed() {
+    public void onDownloadFailed(String fileUrl, String fileName) {
         try {
             downloadDialogDismiss();
+            mDownloadUrls.remove(fileUrl);
             ToastUtils.showToastCenter(mActivity, "下载失败");
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
 }

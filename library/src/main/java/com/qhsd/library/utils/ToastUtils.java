@@ -163,6 +163,9 @@ public class ToastUtils {
      * @param time    显示时间，单位毫秒
      */
     public static void showToast(final Context context, final int gravity, final String text, final int time) {
+        if (context == null) {
+            return;
+        }
         Toast toast = new Toast(context);
         View view = LayoutInflater.from(context).inflate(R.layout.lib_toast, null);
         TextView textView = view.findViewById(R.id.lib_toast_content);
@@ -182,6 +185,9 @@ public class ToastUtils {
      * @param time 显示时间，单位毫秒
      */
     private static void showBigToast(final Context context, final String text, boolean flag, final int time) {
+        if (context == null) {
+            return;
+        }
         Toast toast = new Toast(context);
         View view = LayoutInflater.from(context).inflate(R.layout.lib_toast_big, null);
         TextView textView = view.findViewById(R.id.lib_toast_content);

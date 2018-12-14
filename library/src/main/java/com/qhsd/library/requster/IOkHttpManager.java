@@ -311,7 +311,7 @@ public abstract class IOkHttpManager {
                     }
                 }
             });
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -357,7 +357,7 @@ public abstract class IOkHttpManager {
 
                 }
             });
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -366,21 +366,22 @@ public abstract class IOkHttpManager {
      * 下载文件
      *
      * @param fileUrl      下载地址
+     * @param fileName     下载后保存的文件名字
      * @param downloadBack 回调
      */
-    public void downloadFile(final String fileUrl, final OkHttpDownloadBack downloadBack) {
+    public void downloadFile(final String fileUrl, final String fileName, final OkHttpDownloadBack downloadBack) {
         Request request = new Request.Builder().url(fileUrl).build();
         mOkHttpClient.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
                 // 下载失败
-                onFailedDownloadBack(downloadBack);
+                onFailedDownloadBack(fileUrl, fileName, downloadBack);
             }
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 if (response.code() != 200) {
-                    onFailedDownloadBack(downloadBack);
+                    onFailedDownloadBack(fileUrl, fileName, downloadBack);
                     return;
                 }
                 InputStream is = null;
@@ -392,7 +393,7 @@ public abstract class IOkHttpManager {
                 try {
                     is = response.body().byteStream();
                     long total = response.body().contentLength();
-                    File file = new File(savePath, fileUrl.substring(fileUrl.lastIndexOf("/") + 1));
+                    File file = new File(savePath, fileName);
                     FileUtils.deleteFile(file);
                     fos = new FileOutputStream(file);
                     long sum = 0;
@@ -405,9 +406,9 @@ public abstract class IOkHttpManager {
                     }
                     fos.flush();
                     // 下载完成
-                    onSuccessDownloadBack(file, downloadBack);
+                    onSuccessDownloadBack(file, fileUrl, fileName, downloadBack);
                 } catch (Exception e) {
-                    onFailedDownloadBack(downloadBack);
+                    onFailedDownloadBack(fileUrl, fileName, downloadBack);
                 } finally {
                     try {
                         if (is != null) {
@@ -547,12 +548,12 @@ public abstract class IOkHttpManager {
      * @param file         下载进度
      * @param downloadBack 回调
      */
-    private void onSuccessDownloadBack(final File file, final OkHttpDownloadBack downloadBack) {
+    private void onSuccessDownloadBack(final File file, final String fileUrl, final String fileName, final OkHttpDownloadBack downloadBack) {
         okHttpHandler.post(new Runnable() {
             @Override
             public void run() {
                 if (null != downloadBack) {
-                    downloadBack.onDownloadSuccess(file);
+                    downloadBack.onDownloadSuccess(file, fileUrl, fileName);
                 }
             }
         });
@@ -563,12 +564,12 @@ public abstract class IOkHttpManager {
      *
      * @param downloadBack 回调
      */
-    private void onFailedDownloadBack(final OkHttpDownloadBack downloadBack) {
+    private void onFailedDownloadBack(final String fileUrl, final String fileName, final OkHttpDownloadBack downloadBack) {
         okHttpHandler.post(new Runnable() {
             @Override
             public void run() {
                 if (null != downloadBack) {
-                    downloadBack.onDownloadFailed();
+                    downloadBack.onDownloadFailed(fileUrl, fileName);
                 }
             }
         });
