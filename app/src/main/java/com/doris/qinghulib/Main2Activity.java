@@ -7,9 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.qhsd.library.utils.ApkUpdateUtils;
-import com.qhsd.library.utils.ToastUtils;
-
-import okhttp3.OkHttpClient;
+import com.qhsd.library.utils.NotificationDownloadUtils;
 
 /**
  * @author Doris
@@ -19,6 +17,7 @@ public class Main2Activity extends AppCompatActivity {
 
     private ApkUpdateUtils mApkUpdateUtils1;
     private ApkUpdateUtils mApkUpdateUtils2;
+    private NotificationDownloadUtils downloadUtils;
 
     private String mUrl = "http://i2.houputech.com/fedapppackages/qhsd_v4.0.1_2018.12.1201_promotion.apk";
 
@@ -36,6 +35,7 @@ public class Main2Activity extends AppCompatActivity {
 
         mApkUpdateUtils1 = new ApkUpdateUtils(this, true);
         mApkUpdateUtils2 = new ApkUpdateUtils(this, false, true);
+        downloadUtils = new NotificationDownloadUtils(this, R.mipmap.ic_launcher);
     }
 
     public void onMain2ViewClick(View view){
@@ -47,6 +47,11 @@ public class Main2Activity extends AppCompatActivity {
             case R.id.button2:
                 mApkUpdateUtils2.showDownloadProgressDialog(mUrl, "test1.apk",
                         OkHttpManager.getInstance(this));
+                break;
+            case R.id.button3:
+                downloadUtils.create(mUrl, "test1.apk", OkHttpManager.getInstance(this));
+                break;
+            case R.id.button4:
                 break;
             default:
                 break;
