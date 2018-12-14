@@ -15,7 +15,7 @@ import com.qhsd.library.utils.ProgressDialogUtil;
  * @author Doris.
  * @date 2018/12/14.
  */
-public abstract class BaseActivity extends AppCompatActivity {
+public abstract class LibBaseActivity extends AppCompatActivity {
 
     protected static final String TAG = "qhsd";
 

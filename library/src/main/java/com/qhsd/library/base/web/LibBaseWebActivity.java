@@ -10,7 +10,7 @@ import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 
-import com.qhsd.library.base.BaseActivity;
+import com.qhsd.library.base.LibBaseActivity;
 import com.qhsd.library.utils.NetworkUtils;
 import com.qhsd.library.utils.ToastUtils;
 
@@ -19,7 +19,7 @@ import com.qhsd.library.utils.ToastUtils;
  * @date 2018/12/14.
  */
 
-public abstract class BaseWebActivity extends BaseActivity {
+public abstract class LibBaseWebActivity extends LibBaseActivity {
 
     protected static final int REQUEST_CODE_PERMISSION_CAMERA = 0x101;
     protected static final int REQUEST_CODE_PERMISSION_WRITE_EXTERNAL_STORAGE = 0x102;
@@ -29,7 +29,7 @@ public abstract class BaseWebActivity extends BaseActivity {
      *
      * @param webView WebView
      */
-    private void initBaseWebView(WebView webView) {
+    protected void initBaseWebView(WebView webView) {
         webView.getSettings().setJavaScriptEnabled(true);
         webView.getSettings().setLoadWithOverviewMode(true);
         // 自适应屏幕

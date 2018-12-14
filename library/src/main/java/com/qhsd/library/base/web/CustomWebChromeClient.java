@@ -139,7 +139,7 @@ public class CustomWebChromeClient extends WebChromeClient {
     /**
      * 调用系统相机
      */
-    private void goToTakePhoto() {
+    public void goToTakePhoto() {
         mChoose = true;
         try {
             Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -313,7 +313,7 @@ public class CustomWebChromeClient extends WebChromeClient {
         return null;
     }
 
-    private void takePhotoResult(int resultCode) {
+    public void takePhotoResult(int resultCode) {
         if (mFilePathCallback != null) {
             if (resultCode == Activity.RESULT_OK) {
                 Uri uri = Uri.fromFile(new File(mPhotoPath));

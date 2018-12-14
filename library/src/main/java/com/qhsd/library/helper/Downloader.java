@@ -52,8 +52,7 @@ public class Downloader {
             }
             file = new File(file.getAbsoluteFile(), name);
             if (file.exists()){
-                ApkUtils.installAPK(file, mContext);
-                return;
+                file.delete();
             }
             //创建下载任务
             DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));

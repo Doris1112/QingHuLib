@@ -16,7 +16,7 @@ import android.view.ViewGroup;
  * @date 2018/12/14.
  */
 
-public abstract class BaseFragment extends Fragment {
+public abstract class LibBaseFragment extends Fragment {
 
     protected static final String TAG = "qhsd";
 
@@ -47,7 +47,8 @@ public abstract class BaseFragment extends Fragment {
             View root = inflater.inflate(getLayoutResId(), container, false);
             mContext = getActivity();
             mRoot = root;
-            initView(mRoot);
+            initViewBefore();
+            initView();
         } else {
             if (mRoot.getParent() != null) {
                 // 把当前Root从其父控件中移除
@@ -85,7 +86,7 @@ public abstract class BaseFragment extends Fragment {
 
     }
 
-    public void initView(View view) {
+    public void initView() {
 
     }
 
