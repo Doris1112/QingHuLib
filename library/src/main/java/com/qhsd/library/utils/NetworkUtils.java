@@ -2,7 +2,9 @@ package com.qhsd.library.utils;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
+import android.net.Network;
 import android.net.NetworkInfo;
+import android.os.Build;
 
 /**
  * @author Doris
@@ -19,6 +21,7 @@ public class NetworkUtils {
 
     /**
      * 获取网络类型
+     *
      * @param context Context
      * @return NetworkType
      */
@@ -46,25 +49,13 @@ public class NetworkUtils {
     }
 
     /**
-     * 检查是否连接完了
-     * @param context Context
-     * @return 连接：true，未连接：false
-     */
-    public static boolean isNetworkConnected(Context context) {
-        ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo ni = cm.getActiveNetworkInfo();
-        return ni != null && ni.isConnectedOrConnecting();
-    }
-
-    /**
      * 检测当前网络可用
      *
      * @param context Context
      * @return 可用：true，不可用：false
      */
     public static boolean isNetworkAvailable(Context context) {
-        ConnectivityManager connectivity = (ConnectivityManager) context
-                .getSystemService(Context.CONNECTIVITY_SERVICE);
+        ConnectivityManager connectivity = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         if (connectivity != null) {
             NetworkInfo info = connectivity.getActiveNetworkInfo();
             if (info != null && info.isConnected()) {
