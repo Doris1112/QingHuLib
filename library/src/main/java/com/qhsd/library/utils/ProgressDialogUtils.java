@@ -14,7 +14,7 @@ import com.qhsd.library.R;
  * @author Doris
  * @date 2018/12/13
  **/
-public class ProgressDialogUtil {
+public class ProgressDialogUtils {
 
     private static Dialog mDialog;
 

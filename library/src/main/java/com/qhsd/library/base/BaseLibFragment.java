@@ -78,19 +78,19 @@ public abstract class BaseLibFragment extends Fragment {
         initArgs(getArguments());
     }
 
-    public void initArgs(Bundle bundle){
+    protected void initArgs(Bundle bundle){
 
     }
 
-    public void initViewBefore() {
+    protected void initViewBefore() {
 
     }
 
-    public void initView() {
+    protected void initView() {
 
     }
 
-    public void initData() {
+    protected void initData() {
 
     }
 

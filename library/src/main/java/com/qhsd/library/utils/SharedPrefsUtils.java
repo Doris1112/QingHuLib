@@ -8,19 +8,19 @@ import android.content.SharedPreferences.Editor;
  * @author Doris
  * @date 2018/12/13
  **/
-public class SharedPrefsUtil {
+public class SharedPrefsUtils {
 
-    private static SharedPrefsUtil prefsUtil;
+    private static SharedPrefsUtils prefsUtil;
     private Context context;
 
-    public static SharedPrefsUtil getInstance(Context context){
+    public static SharedPrefsUtils getInstance(Context context){
         if (prefsUtil == null){
-            prefsUtil = new SharedPrefsUtil(context);
+            prefsUtil = new SharedPrefsUtils(context);
         }
         return prefsUtil;
     }
 
-    private SharedPrefsUtil(Context context){
+    private SharedPrefsUtils(Context context){
         this.context = context;
     }
 

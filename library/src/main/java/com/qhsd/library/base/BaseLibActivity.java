@@ -13,7 +13,7 @@ import android.widget.TextView;
 import com.qhsd.library.R;
 import com.qhsd.library.helper.AppManager;
 import com.qhsd.library.utils.HideInputUtils;
-import com.qhsd.library.utils.ProgressDialogUtil;
+import com.qhsd.library.utils.ProgressDialogUtils;
 
 /**
  * @author Doris.
@@ -103,7 +103,7 @@ public abstract class BaseLibActivity extends AppCompatActivity {
      *
      * @param text 右边文字
      */
-    public void setRightText(String text) {
+    protected void setRightText(String text) {
         if (mRightText != null) {
             mRightText.setVisibility(View.VISIBLE);
             mRightText.setText(text);
@@ -115,7 +115,7 @@ public abstract class BaseLibActivity extends AppCompatActivity {
      *
      * @param onClickListener 点击事件
      */
-    public void setRightOnclick(View.OnClickListener onClickListener) {
+    protected void setRightOnclick(View.OnClickListener onClickListener) {
         if (mRightLayout != null){
             mRightLayout.setOnClickListener(onClickListener);
         }
@@ -134,7 +134,7 @@ public abstract class BaseLibActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
-        ProgressDialogUtil.dismissDialog();
+        ProgressDialogUtils.dismissDialog();
         super.onDestroy();
         AppManager.getAppManager().finishActivity(this);
     }

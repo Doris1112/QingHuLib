@@ -5,7 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
-import com.qhsd.library.utils.ProgressDialogUtil;
+import com.qhsd.library.utils.ProgressDialogUtils;
 import com.qhsd.library.utils.ToastUtils;
 
 /**
@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
                 ToastUtils.showToastCenter(this, "123");
                 break;
             case R.id.button2:
-                ProgressDialogUtil.showDialog(this);
+                ProgressDialogUtils.showDialog(this);
                 break;
             case R.id.button3:
                 Intent intent = new Intent(this, Main2Activity.class);

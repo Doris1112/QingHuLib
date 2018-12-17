@@ -19,7 +19,6 @@ import java.util.concurrent.TimeUnit;
 
 import okhttp3.Call;
 import okhttp3.Callback;
-import okhttp3.FormBody;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
@@ -83,6 +82,10 @@ public abstract class IOkHttpManager {
         //初始化Handler
         okHttpHandler = new Handler(context.getMainLooper());
         mContext = context;
+    }
+
+    public Context getContext(){
+        return mContext;
     }
 
     /**
@@ -344,7 +347,6 @@ public abstract class IOkHttpManager {
                 public void onFailure(Call call, IOException e) {
                     onFailedCallBack(e, callBack, actionUrl);
                 }
-
 
                 @Override
                 public void onResponse(Call call, Response response) throws IOException {
