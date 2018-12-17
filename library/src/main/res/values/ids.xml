@@ -4,4 +4,9 @@
     <item type="id" name="linear_tab"/>
     <item type="id" name="divide_tab"/>
     <item type="id" name="viewpager_tab"/>
+
+    <item type="id" name="item_title_back_layout"/>
+    <item type="id" name="item_title_name"/>
+    <item type="id" name="item_title_right_layout"/>
+    <item type="id" name="item_title_right_tv"/>
 </resources>

@@ -6,7 +6,11 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
+import com.qhsd.library.R;
 import com.qhsd.library.helper.AppManager;
 import com.qhsd.library.utils.HideInputUtils;
 import com.qhsd.library.utils.ProgressDialogUtil;
@@ -15,9 +19,12 @@ import com.qhsd.library.utils.ProgressDialogUtil;
  * @author Doris.
  * @date 2018/12/14.
  */
-public abstract class LibBaseActivity extends AppCompatActivity {
+public abstract class BaseLibActivity extends AppCompatActivity {
 
     protected static final String TAG = "qhsd";
+
+    protected LinearLayout mBackLayout, mRightLayout;
+    protected TextView mTitleName, mRightText;
 
     /**
      * 防止连续点击跳转两个页面
@@ -39,24 +46,79 @@ public abstract class LibBaseActivity extends AppCompatActivity {
         setContentView(getLayoutResId());
         AppManager.getAppManager().addActivity(this);
         initViewBefore();
+        initBaseItemView();
         initView();
         initData();
     }
 
-    public void initSetContentViewBefore() {
+    protected void initSetContentViewBefore() {
 
     }
 
-    public void initViewBefore() {
+    protected void initViewBefore() {
 
     }
 
-    public void initView() {
+    private void initBaseItemView(){
+        mBackLayout = findViewById(R.id.item_title_back_layout);
+        mTitleName = findViewById(R.id.item_title_name);
+        mRightLayout = findViewById(R.id.item_title_right_layout);
+        mRightText = findViewById(R.id.item_title_right_tv);
+
+        if (mBackLayout != null){
+            mBackLayout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    InputMethodManager manager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+                    manager.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                    AppManager.getAppManager().finishActivity(BaseLibActivity.this);
+                    finish();
+                }
+            });
+        }
+    }
+
+    protected void initView() {
 
     }
 
-    public void initData() {
+    protected void initData() {
 
+    }
+
+    /**
+     * 设置标题
+     *
+     * @param title 标题
+     */
+    protected void setTitle(String title){
+        if (mTitleName != null){
+            mTitleName.setText(title);
+        }
+    }
+
+    /**
+     * 设置右边文字
+     * 默认隐藏
+     *
+     * @param text 右边文字
+     */
+    public void setRightText(String text) {
+        if (mRightText != null) {
+            mRightText.setVisibility(View.VISIBLE);
+            mRightText.setText(text);
+        }
+    }
+
+    /**
+     * 设置右边文字点击事件
+     *
+     * @param onClickListener 点击事件
+     */
+    public void setRightOnclick(View.OnClickListener onClickListener) {
+        if (mRightLayout != null){
+            mRightLayout.setOnClickListener(onClickListener);
+        }
     }
 
     @Override

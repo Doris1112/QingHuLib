@@ -10,7 +10,7 @@ import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 
-import com.qhsd.library.base.LibBaseActivity;
+import com.qhsd.library.base.BaseLibActivity;
 import com.qhsd.library.utils.NetworkUtils;
 import com.qhsd.library.utils.ToastUtils;
 
@@ -19,7 +19,7 @@ import com.qhsd.library.utils.ToastUtils;
  * @date 2018/12/14.
  */
 
-public abstract class LibBaseWebActivity extends LibBaseActivity {
+public abstract class BaseLibWebActivity extends BaseLibActivity {
 
     protected static final int REQUEST_CODE_PERMISSION_CAMERA = 0x101;
     protected static final int REQUEST_CODE_PERMISSION_WRITE_EXTERNAL_STORAGE = 0x102;

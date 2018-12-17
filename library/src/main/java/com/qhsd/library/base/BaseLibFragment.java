@@ -16,7 +16,7 @@ import android.view.ViewGroup;
  * @date 2018/12/14.
  */
 
-public abstract class LibBaseFragment extends Fragment {
+public abstract class BaseLibFragment extends Fragment {
 
     protected static final String TAG = "qhsd";
 
