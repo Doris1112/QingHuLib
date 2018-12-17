@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!--popupWindow 底部弹出动画-->
     <style name="lib_popup_bottom_anim_style" parent="android:Animation">
         <item name="android:windowEnterAnimation">@anim/lib_pop_bottom_enter_anim</item>
         <item name="android:windowExitAnimation">@anim/lib_pop_bottom_exit_anim</item>
+    </style>
+
+    <style name="lib_popup_fade_anim_style" parent="@android:style/Animation">
+        <item name="android:windowEnterAnimation">@anim/lib_fade_in_anim</item>
+        <item name="android:windowExitAnimation">@anim/lib_fade_out_anim</item>
     </style>
 
 </resources>

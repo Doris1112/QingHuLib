@@ -29,4 +29,7 @@ public class BaseNumber {
     public static final int NINETEEN = 19;
     public static final int TWENTY = 20;
 
+    public static final int TWO_THOUSAND = 2000;
+    public static final int TEN_THOUSAND = 10000;
+
 }

@@ -13,4 +13,12 @@
     <string name="lib_take_photo">拍照</string>
     <string name="lib_choose_form_storage">从相册中选择</string>
 
+    <string name="lib_all">所有</string>
+    <string name="lib_less_than_two_thousand">2000以内</string>
+    <string name="lib_two_thousand_ten_thousand">2000&#8211;10000</string>
+    <string name="lib_more_than_ten_thousand">10000以上</string>
+    <string name="lib_hot_product">热门产品</string>
+    <string name="lib_credit_loan">信用贷</string>
+    <string name="lib_large_loan">大额贷</string>
+    <string name="lib_wage_loan">工薪贷</string>
 </resources>

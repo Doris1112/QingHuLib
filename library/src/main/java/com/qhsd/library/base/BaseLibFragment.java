@@ -10,6 +10,12 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import com.qhsd.library.R;
+import com.qhsd.library.helper.AppManager;
 
 /**
  * @author Doris.
@@ -22,6 +28,10 @@ public abstract class BaseLibFragment extends Fragment {
 
     protected Activity mContext;
     protected View mRoot;
+
+    protected LinearLayout mBackLayout, mRightLayout;
+    protected TextView mTitleName, mRightText;
+
     /**
      * 标示是否第一次初始化数据
      */
@@ -48,6 +58,7 @@ public abstract class BaseLibFragment extends Fragment {
             mContext = getActivity();
             mRoot = root;
             initViewBefore();
+            initBaseItemView();
             initView();
         } else {
             if (mRoot.getParent() != null) {
@@ -86,6 +97,13 @@ public abstract class BaseLibFragment extends Fragment {
 
     }
 
+    private void initBaseItemView(){
+        mBackLayout = mRoot.findViewById(R.id.item_title_back_layout);
+        mTitleName = mRoot.findViewById(R.id.item_title_name);
+        mRightLayout = mRoot.findViewById(R.id.item_title_right_layout);
+        mRightText = mRoot.findViewById(R.id.item_title_right_tv);
+    }
+
     protected void initView() {
 
     }
@@ -106,6 +124,41 @@ public abstract class BaseLibFragment extends Fragment {
      */
     protected void onFirstInit() {
 
+    }
+
+    /**
+     * 设置标题
+     *
+     * @param title 标题
+     */
+    protected void setTitle(String title){
+        if (mTitleName != null){
+            mTitleName.setText(title);
+        }
+    }
+
+    /**
+     * 设置右边文字
+     * 默认隐藏
+     *
+     * @param text 右边文字
+     */
+    protected void setRightText(String text) {
+        if (mRightText != null) {
+            mRightText.setVisibility(View.VISIBLE);
+            mRightText.setText(text);
+        }
+    }
+
+    /**
+     * 设置右边文字点击事件
+     *
+     * @param onClickListener 点击事件
+     */
+    protected void setRightOnclick(View.OnClickListener onClickListener) {
+        if (mRightLayout != null){
+            mRightLayout.setOnClickListener(onClickListener);
+        }
     }
 
     /**
