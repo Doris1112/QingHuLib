@@ -7,10 +7,12 @@ import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.view.View;
+import android.view.WindowManager;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 
 import com.qhsd.library.base.BaseLibActivity;
+import com.qhsd.library.helper.AndroidStatusBugWorkaround;
 import com.qhsd.library.utils.NetworkUtils;
 import com.qhsd.library.utils.ToastUtils;
 
@@ -23,6 +25,15 @@ public abstract class BaseLibWebActivity extends BaseLibActivity {
 
     protected static final int REQUEST_CODE_PERMISSION_CAMERA = 0x101;
     protected static final int REQUEST_CODE_PERMISSION_WRITE_EXTERNAL_STORAGE = 0x102;
+
+    @Override
+    protected void initViewBefore() {
+        super.initViewBefore();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        }
+        AndroidStatusBugWorkaround.assistActivity(this);
+    }
 
     /**
      * 初始化WebView
