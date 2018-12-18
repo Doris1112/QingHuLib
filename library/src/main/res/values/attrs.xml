@@ -32,4 +32,22 @@
         <attr name="borderMargin" format="integer"/>
         <attr name="borderNum" format="integer"/>
     </declare-styleable>
+
+    <declare-styleable name="SignCalendarView">
+        <attr name="weekHeight" format="dimension" />
+        <attr name="weekTextSize" format="dimension" />
+        <attr name="weekBackgroundColor" format="color" />
+        <attr name="weekTextColor" format="color" />
+        <attr name="calendarTextSize" format="dimension" />
+        <attr name="calendarTextColor" format="color" />
+        <attr name="isShowLunar" format="boolean" />
+        <attr name="lunarTextColor" format="color" />
+        <attr name="lunarTextSize" format="dimension" />
+        <attr name="todayTextColor" format="color" />
+        <attr name="todayColor" format="color" />
+        <attr name="signColor" format="color" />
+        <attr name="signSize" format="dimension" />
+        <attr name="signTextColor" format="color" />
+        <attr name="limitFutureMonth" format="boolean" />
+    </declare-styleable>
 </resources>
