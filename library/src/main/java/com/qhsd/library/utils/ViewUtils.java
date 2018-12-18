@@ -1,6 +1,7 @@
 package com.qhsd.library.utils;
 
 import android.content.res.Resources;
+import android.support.design.widget.TabLayout;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.TextUtils;
