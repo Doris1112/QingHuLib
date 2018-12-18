@@ -16,6 +16,8 @@ import com.qhsd.library.helper.AndroidStatusBugWorkaround;
 import com.qhsd.library.utils.NetworkUtils;
 import com.qhsd.library.utils.ToastUtils;
 
+import org.greenrobot.eventbus.EventBus;
+
 /**
  * @author Doris.
  * @date 2018/12/14.
@@ -33,6 +35,7 @@ public abstract class BaseLibWebActivity extends BaseLibActivity {
             getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         }
         AndroidStatusBugWorkaround.assistActivity(this);
+        EventBus.getDefault().register(this);
     }
 
     /**
@@ -143,5 +146,11 @@ public abstract class BaseLibWebActivity extends BaseLibActivity {
                     break;
             }
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 }
