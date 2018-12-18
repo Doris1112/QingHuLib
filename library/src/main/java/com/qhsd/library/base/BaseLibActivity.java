@@ -114,6 +114,7 @@ public abstract class BaseLibActivity extends AppCompatActivity {
      */
     protected void setRightText(String text) {
         if (mRightText != null) {
+            mRightLayout.setVisibility(View.VISIBLE);
             mRightText.setVisibility(View.VISIBLE);
             mRightText.setText(text);
         }
@@ -126,6 +127,7 @@ public abstract class BaseLibActivity extends AppCompatActivity {
      */
     protected void setRightOnclick(View.OnClickListener onClickListener) {
         if (mRightLayout != null){
+            mRightLayout.setVisibility(View.VISIBLE);
             mRightLayout.setOnClickListener(onClickListener);
         }
     }
