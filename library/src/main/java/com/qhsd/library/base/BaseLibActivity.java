@@ -98,6 +98,15 @@ public abstract class BaseLibActivity extends AppCompatActivity {
     }
 
     /**
+     * 设置左边按钮显示
+     */
+    protected void setLeftBtnVisible(){
+        if (mBackLayout != null){
+            mBackLayout.setVisibility(View.VISIBLE);
+        }
+    }
+
+    /**
      * 设置右边文字
      * 默认隐藏
      *
