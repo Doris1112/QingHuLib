@@ -9,7 +9,7 @@
     <string name="lib_data_empty">暂无相关内容</string>
     <string name="lib_data_no_more">没有更多了</string>
     <string name="lib_net_error">网络不给力，点击重试</string>
-    <string name="lib_loading">拼命加载中……</string>
+    <string name="lib_loading">努力加载中……</string>
     <string name="lib_take_photo">拍照</string>
     <string name="lib_choose_form_storage">从相册中选择</string>
     <string name="lib_all">所有</string>

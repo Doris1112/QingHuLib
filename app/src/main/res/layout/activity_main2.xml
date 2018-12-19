@@ -11,27 +11,36 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="onMain2ViewClick"
-        android:text="@string/app_name"/>
+        android:text="LimitPopup" />
 
     <Button
         android:id="@+id/button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="onMain2ViewClick"
-        android:text="@string/app_name"/>
+        android:text="TypePopup" />
+
+    <TextView
+        android:id="@+id/text1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/dp_10"
+        android:text="倒计时"
+        android:onClick="onMain2ViewClick"
+        android:textColor="@color/gray_3" />
 
     <Button
         android:id="@+id/button3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="onMain2ViewClick"
-        android:text="@string/app_name"/>
+        android:text="@string/app_name" />
 
     <Button
         android:id="@+id/button4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="onMain2ViewClick"
-        android:text="@string/app_name"/>
+        android:text="@string/app_name" />
 
 </LinearLayout>

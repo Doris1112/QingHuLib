@@ -4,8 +4,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.qhsd.library.base.BaseNumber;
+import com.qhsd.library.helper.CountDownHelper;
 import com.qhsd.library.popup.LimitPopupWindow;
 import com.qhsd.library.popup.TypePopupWindow;
 
@@ -17,6 +19,8 @@ public class Main2Activity extends AppCompatActivity {
 
     private Button button1, button2;
     private int mMoneyStart = 0, mMoneyEnd = 0, mType = BaseNumber.NINE;
+    private TextView text1;
+    private CountDownHelper countDownHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +29,7 @@ public class Main2Activity extends AppCompatActivity {
 
         button1 = findViewById(R.id.button1);
         button2 = findViewById(R.id.button2);
+        text1 = findViewById(R.id.text1);
     }
 
     public void onMain2ViewClick(View view) {
@@ -52,6 +57,11 @@ public class Main2Activity extends AppCompatActivity {
                     }
                 });
                 break;
+            case R.id.text1:
+                if (countDownHelper == null){
+                    countDownHelper = new CountDownHelper(text1, "重新倒计时", 60, 1);
+                }
+                countDownHelper.start();
             case R.id.button3:
                 break;
             case R.id.button4:
