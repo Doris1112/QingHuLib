@@ -10,6 +10,8 @@ import com.qhsd.library.base.BaseNumber;
 import com.qhsd.library.helper.CountDownHelper;
 import com.qhsd.library.popup.LimitPopupWindow;
 import com.qhsd.library.popup.TypePopupWindow;
+import com.qhsd.library.utils.CommonDialogUtils;
+import com.qhsd.library.utils.ToastUtils;
 
 /**
  * @author Doris
@@ -58,11 +60,19 @@ public class Main2Activity extends AppCompatActivity {
                 });
                 break;
             case R.id.text1:
-                if (countDownHelper == null){
+                if (countDownHelper == null) {
                     countDownHelper = new CountDownHelper(text1, "重新倒计时", 60, 1);
                 }
                 countDownHelper.start();
             case R.id.button3:
+                CommonDialogUtils.showDialog(this,
+                        "提示", "显示是否正确？",
+                        new CommonDialogUtils.CommonDialogCallback() {
+                            @Override
+                            public void onClick() {
+                                ToastUtils.showToastCenter(Main2Activity.this, "正确");
+                            }
+                        });
                 break;
             case R.id.button4:
                 break;

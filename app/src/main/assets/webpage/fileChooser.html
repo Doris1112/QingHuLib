@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,maximun-scale=1,mininum-scsle=1,user-scale=1">
+    <title>file chooser</title>
+    <style>
+        .filechooser{
+            width:95%;
+            height: 50px;
+            -webkit-background-clip: border-box;
+
+        }
+
+
+    </style>
+    <script>
+        var display=function (){
+            var path=document.getElementById("file_chooser").textContent;
+            document.getElementById("filechooser_display").innerHTML("<b>"+path+"</b>");
+        }
+
+
+    </script>
+</head>
+<body>
+<div>纯input与type</div>
+<input type="file">
+
+<div>指明需要图片</div>
+<input type="file" accept='image/*'>
+
+<div>指明需要多张图片</div>
+<input type="file" multiple accept='image/*'>
+
+<div>指明调用摄像头获取图片</div>
+<input type="file" capture='camera' accept='image/*'>
+
+<div>指明调用摄像头并多张图片</div>
+<!-- multiple 无效 -->
+<input type="file" multiple capture='camera' accept='image/*'>
+</body>
+</html>

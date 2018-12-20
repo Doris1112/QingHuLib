@@ -3,60 +3,61 @@ package com.qhsd.library.base.web;
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Build;
 import android.view.View;
-import android.webkit.ValueCallback;
-import android.webkit.WebChromeClient;
-import android.webkit.WebView;
 import android.widget.ProgressBar;
 
 import com.qhsd.library.base.BaseNumber;
 import com.qhsd.library.base.BaseString;
 import com.qhsd.library.utils.WebViewChooseUtils;
+import com.tencent.smtt.sdk.ValueCallback;
+import com.tencent.smtt.sdk.WebChromeClient;
+import com.tencent.smtt.sdk.WebView;
 
 /**
  * @author Doris.
  * @date 2018/12/14.
  */
 
-public class CustomWebChromeClient extends WebChromeClient {
+public class CustomX5WebChromeClient extends WebChromeClient {
 
     private Activity mContext;
     private ProgressBar mProgressBar;
 
     private ValueCallback<Uri[]> mFilePathCallback5;
 
-    public CustomWebChromeClient(Activity context) {
-        mContext = context;
+    public CustomX5WebChromeClient(Activity context) {
+        this(context, null);
     }
 
-    public CustomWebChromeClient(Activity context, ProgressBar progressBar){
+    public CustomX5WebChromeClient(Activity context, ProgressBar progressBar){
         mContext = context;
         mProgressBar = progressBar;
     }
 
     @Override
-    public void onProgressChanged(WebView view, int newProgress) {
-        super.onProgressChanged(view, newProgress);
+    public void onProgressChanged(WebView webView, int i) {
+        super.onProgressChanged(webView, i);
         if (mProgressBar != null){
-            mProgressBar.setProgress(newProgress);
-            if (newProgress >= BaseNumber.ONE_HUNDRED){
+            mProgressBar.setProgress(i);
+            if (i >= BaseNumber.ONE_HUNDRED){
                 mProgressBar.setVisibility(View.GONE);
             }
         }
     }
 
+    /**
+     * Android  >= 5.0
+     */
     @Override
-    public boolean onShowFileChooser(WebView webView, ValueCallback<Uri[]> filePathCallback, FileChooserParams fileChooserParams) {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-            return false;
-        }
+    public boolean onShowFileChooser(WebView webView, ValueCallback<Uri[]> filePathCallback,
+                                     FileChooserParams fileChooserParams) {
         mFilePathCallback5 = filePathCallback;
         if (fileChooserParams.getAcceptTypes().length > 0 &&
                 BaseString.IMAGE_TYPE.equals(fileChooserParams.getAcceptTypes()[0])) {
             // 选择图片
             int maxSelectNum = fileChooserParams.getMode() == 0 ? 1 : 9;
-            WebViewChooseUtils.openPictureChooseProcess(mContext, maxSelectNum, fileChooserParams.isCaptureEnabled());
+            WebViewChooseUtils.openPictureChooseProcess(mContext, maxSelectNum,
+                    fileChooserParams.isCaptureEnabled());
         } else {
             // 选择文件
             WebViewChooseUtils.openFileChooseProcess(mContext);

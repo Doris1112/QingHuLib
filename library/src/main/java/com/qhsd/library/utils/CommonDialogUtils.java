@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
 
@@ -62,18 +63,21 @@ public class CommonDialogUtils {
     private static Dialog getDialog(Activity activity, View view) {
         Dialog dialog = new Dialog(activity);
         dialog.setContentView(view);
-        dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
         dialog.setCanceledOnTouchOutside(true);
-        dialog.show();
-        WindowManager m = activity.getWindowManager();
-        DisplayMetrics outMetrics = new DisplayMetrics();
-        m.getDefaultDisplay().getMetrics(outMetrics);
-        //获取对话框当前的参数值
-        WindowManager.LayoutParams p = dialog.getWindow().getAttributes();
-        //宽度设置为屏幕的0.8
-        p.width = (int) (outMetrics.widthPixels * 0.8);
-        //设置生效
-        dialog.getWindow().setAttributes(p);
+        Window window = dialog.getWindow();
+        if (window != null) {
+            window.setBackgroundDrawableResource(android.R.color.transparent);
+            WindowManager m = activity.getWindowManager();
+            DisplayMetrics outMetrics = new DisplayMetrics();
+            m.getDefaultDisplay().getMetrics(outMetrics);
+            //获取对话框当前的参数值
+            WindowManager.LayoutParams p = window.getAttributes();
+            //宽度设置为屏幕的0.8
+            p.width = (int) (outMetrics.widthPixels * 0.8);
+            //设置生效
+            window.setAttributes(p);
+            dialog.show();
+        }
         return dialog;
     }
 

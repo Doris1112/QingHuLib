@@ -8,10 +8,9 @@
     android:orientation="horizontal"
     android:padding="@dimen/dp_10">
 
-    <ProgressBar
+    <com.qhsd.library.view.LoadingView
         android:layout_width="@dimen/dp_30"
-        android:layout_height="@dimen/dp_30"
-        android:indeterminateTint="@color/default_color" />
+        android:layout_height="@dimen/dp_30" />
 
     <TextView
         android:id="@+id/lib_dialog_content"

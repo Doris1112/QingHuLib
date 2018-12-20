@@ -9,6 +9,7 @@ import android.view.Window;
 import android.widget.TextView;
 
 import com.qhsd.library.R;
+import com.qhsd.library.view.LoadingView;
 
 /**
  * @author Doris
@@ -30,6 +31,7 @@ public class ProgressDialogUtils {
         mDialog.setCanceledOnTouchOutside(false);
         Window window = mDialog.getWindow();
         if (window != null) {
+            window.setBackgroundDrawableResource(android.R.color.transparent);
             window.setGravity(Gravity.CENTER);
             mDialog.show();
         }
@@ -45,6 +47,7 @@ public class ProgressDialogUtils {
         mDialog.setCanceledOnTouchOutside(false);
         Window window = mDialog.getWindow();
         if (window != null) {
+            window.setBackgroundDrawableResource(android.R.color.transparent);
             window.setGravity(Gravity.CENTER);
             mDialog.show();
         }

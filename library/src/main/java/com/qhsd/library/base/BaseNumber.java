@@ -29,7 +29,26 @@ public class BaseNumber {
     public static final int NINETEEN = 19;
     public static final int TWENTY = 20;
 
+    public static final int ONE_HUNDRED = 100;
     public static final int TWO_THOUSAND = 2000;
     public static final int TEN_THOUSAND = 10000;
+
+    /**
+     * 选择图片
+     */
+    public static final int REQUEST_CODE_PICKER_PICTURE = 1001;
+    /**
+     * 选择文件
+     */
+    public static final int REQUEST_CODE_PICKER_FILE = 1002;
+
+    /**
+     * 获取相机权限
+     */
+    public static final int REQUEST_CODE_PERMISSION_CAMERA = 0x101;
+    /**
+     * 获取读写权限
+     */
+    public static final int REQUEST_CODE_PERMISSION_WRITE_EXTERNAL_STORAGE = 0x102;
 
 }

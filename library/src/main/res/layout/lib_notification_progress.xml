@@ -25,7 +25,7 @@
         android:layout_toLeftOf="@+id/lib_notification_progress_text"
         android:layout_marginTop="@dimen/dp_10"
         android:max="100"
-        android:progressDrawable="@drawable/lib_progressbar" />
+        android:progressDrawable="@drawable/lib_progress_download" />
 
     <TextView
         android:id="@+id/lib_notification_progress_text"

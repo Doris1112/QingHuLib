@@ -37,7 +37,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_5"
         android:layout_margin="@dimen/dp_15"
-        android:progressDrawable="@drawable/lib_progressbar"
+        android:progressDrawable="@drawable/lib_progress_download"
         android:max="100" />
 
 </LinearLayout>

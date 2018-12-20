@@ -24,4 +24,18 @@ public class BaseString {
     public static final String BLACK_H5 = "BlackH5";
     public static final String NEWS_H5 = "NewsH5";
 
+    /**
+     * 选择图片-图片类型
+     */
+    public static final String IMAGE_TYPE = "image/*";
+    /**
+     * url 开始字符判断
+     */
+    public static final String START_HTTP = "http:";
+    public static final String START_HTTPS = "https:";
+    /**
+     * 跳支付宝支付
+     */
+    public static final String CONTENT_ALI_PAY = "alipays://platformapi";
+
 }
