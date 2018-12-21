@@ -2,19 +2,13 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="@dimen/dp_42"
-    android:gravity="center"
     android:orientation="horizontal">
 
-    <com.qhsd.library.view.LoadingView
-        android:layout_width="@dimen/dp_30"
-        android:layout_height="@dimen/dp_30" />
-
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/dp_3"
-        android:text="@string/lib_loading"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="@string/lib_net_error"
         android:textColor="@color/gray_9"
         android:textSize="@dimen/text_size_15" />
-
 </LinearLayout>
