@@ -1,4 +1,4 @@
-package com.qhsd.library.base;
+package com.qhsd.library.adapter;
 
 /**
  * @author Doris

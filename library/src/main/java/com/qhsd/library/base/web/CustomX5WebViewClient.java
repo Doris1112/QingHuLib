@@ -1,12 +1,11 @@
 package com.qhsd.library.base.web;
 
 import android.content.Context;
-import android.content.IntentFilter;
 import android.graphics.Bitmap;
 import android.view.View;
 import android.widget.ProgressBar;
 
-import com.qhsd.library.base.BaseString;
+import com.qhsd.library.config.BaseString;
 import com.qhsd.library.utils.ApkUtils;
 import com.qhsd.library.utils.ToastUtils;
 import com.tencent.smtt.export.external.interfaces.SslErrorHandler;

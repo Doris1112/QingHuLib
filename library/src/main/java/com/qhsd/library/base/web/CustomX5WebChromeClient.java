@@ -6,8 +6,8 @@ import android.net.Uri;
 import android.view.View;
 import android.widget.ProgressBar;
 
-import com.qhsd.library.base.BaseNumber;
-import com.qhsd.library.base.BaseString;
+import com.qhsd.library.config.BaseNumber;
+import com.qhsd.library.config.BaseString;
 import com.qhsd.library.utils.WebViewChooseUtils;
 import com.tencent.smtt.sdk.ValueCallback;
 import com.tencent.smtt.sdk.WebChromeClient;

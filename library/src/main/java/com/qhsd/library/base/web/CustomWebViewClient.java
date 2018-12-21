@@ -5,12 +5,11 @@ import android.graphics.Bitmap;
 import android.net.http.SslError;
 import android.view.View;
 import android.webkit.SslErrorHandler;
-import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
 
-import com.qhsd.library.base.BaseString;
+import com.qhsd.library.config.BaseString;
 import com.qhsd.library.utils.ApkUtils;
 import com.qhsd.library.utils.ToastUtils;
 

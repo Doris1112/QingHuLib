@@ -16,7 +16,7 @@ import android.widget.ProgressBar;
 import com.qhsd.library.R;
 import com.qhsd.library.base.BaseLibActivity;
 import com.qhsd.library.base.BaseLibApplication;
-import com.qhsd.library.base.BaseNumber;
+import com.qhsd.library.config.BaseNumber;
 import com.qhsd.library.helper.AndroidStatusBugWorkaround;
 import com.qhsd.library.utils.ToastUtils;
 import com.tencent.smtt.export.external.extension.interfaces.IX5WebViewExtension;

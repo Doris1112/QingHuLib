@@ -10,7 +10,7 @@ import android.support.v4.content.FileProvider;
 import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.config.PictureMimeType;
 import com.luck.picture.lib.entity.LocalMedia;
-import com.qhsd.library.base.BaseNumber;
+import com.qhsd.library.config.BaseNumber;
 
 import java.io.File;
 import java.util.List;

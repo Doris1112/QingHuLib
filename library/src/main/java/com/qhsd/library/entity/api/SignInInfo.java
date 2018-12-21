@@ -1,0 +1,48 @@
+package com.qhsd.library.entity.api;
+
+import java.util.List;
+
+/**
+ * @author Doris.
+ * @date 2018/12/21.
+ */
+
+public class SignInInfo {
+
+    private double PendingAmount;
+    private String Summary;
+    private String CurrentMonth;
+    private List<SignInHistory> SignIns;
+
+    public double getPendingAmount() {
+        return PendingAmount;
+    }
+
+    public void setPendingAmount(double pendingAmount) {
+        PendingAmount = pendingAmount;
+    }
+
+    public String getSummary() {
+        return Summary;
+    }
+
+    public void setSummary(String summary) {
+        Summary = summary;
+    }
+
+    public String getCurrentMonth() {
+        return CurrentMonth;
+    }
+
+    public void setCurrentMonth(String currentMonth) {
+        CurrentMonth = currentMonth;
+    }
+
+    public List<SignInHistory> getSignIns() {
+        return SignIns;
+    }
+
+    public void setSignIns(List<SignInHistory> signIns) {
+        SignIns = signIns;
+    }
+}

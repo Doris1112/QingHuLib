@@ -11,7 +11,7 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.qhsd.library.R;
-import com.qhsd.library.base.BaseNumber;
+import com.qhsd.library.config.BaseNumber;
 
 /**
  * @author Doris.
