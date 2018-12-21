@@ -43,12 +43,8 @@ public class BaseNumber {
     public static final int REQUEST_CODE_PICKER_FILE = 1002;
 
     /**
-     * 获取相机权限
-     */
-    public static final int REQUEST_CODE_PERMISSION_CAMERA = 0x101;
-    /**
      * 获取读写权限
      */
-    public static final int REQUEST_CODE_PERMISSION_WRITE_EXTERNAL_STORAGE = 0x102;
+    public static final int REQUEST_CODE_PERMISSION_WRITE_EXTERNAL_STORAGE = 0x109;
 
 }

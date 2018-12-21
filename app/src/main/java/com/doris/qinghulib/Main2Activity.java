@@ -1,5 +1,6 @@
 package com.doris.qinghulib;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -75,6 +76,7 @@ public class Main2Activity extends AppCompatActivity {
                         });
                 break;
             case R.id.button4:
+                startActivity(new Intent(this, Main3Activity.class));
                 break;
             default:
                 break;

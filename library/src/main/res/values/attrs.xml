@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <declare-styleable name="TabContainerViewStyle">
+    <declare-styleable name="TabContainerView">
         <attr name="tabTextSize" format="dimension" />
         <attr name="tabTextColor" format="color" />
         <attr name="selectedTextColor" format="color" />

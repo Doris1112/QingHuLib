@@ -1,9 +1,14 @@
 package com.qhsd.library.base;
 
+import android.os.Environment;
 import android.support.multidex.MultiDexApplication;
 import android.util.Log;
 
+import com.qhsd.library.helper.ScreenAdaptation;
+import com.qhsd.library.utils.ScreenUtils;
 import com.tencent.smtt.sdk.QbSdk;
+
+import java.io.File;
 
 /**
  * @author Doris.
@@ -13,18 +18,24 @@ import com.tencent.smtt.sdk.QbSdk;
 public class BaseLibApplication extends MultiDexApplication {
 
     protected static final String TAG = "qhsd";
+
     public static boolean isInitX5EnvironmentSuccess;
+
+    protected int mScreenWidth = 720;
+    protected int mScreenHeight = 1280;
 
     @Override
     public void onCreate() {
         super.onCreate();
+        // 适配 需要传入ui设计给的大小,初始化
+        if (ScreenUtils.getScreenWidth(this) < mScreenWidth) {
+            new ScreenAdaptation(this, mScreenWidth, mScreenHeight).register();
+        }
         initX5WebCore();
     }
 
     private void initX5WebCore(){
         if (!QbSdk.isTbsCoreInited()) {
-            // 允许使用流量下载
-//            QbSdk.setDownloadWithoutWifi(true);
             QbSdk.initX5Environment(this, new QbSdk.PreInitCallback() {
                 @Override
                 public void onCoreInitFinished() {
@@ -37,6 +48,24 @@ public class BaseLibApplication extends MultiDexApplication {
                     Log.d(TAG, "onViewInitFinished: " + b);
                 }
             });
+            // 非wifi网络条件下是否允许下载内核，默认为false(针对用户没有安装微信/手Q/QQ空间[无内核]的情况下)
+            QbSdk.setDownloadWithoutWifi(true);
         }
+    }
+
+    /**
+     * 获取下载保存目录
+     * @return 保存目录绝对路径
+     */
+    public static String getDownloadSavePath(){
+        String downloadSavePath = Environment.getExternalStorageDirectory().getAbsolutePath()
+                + "/Loan/download/";
+        File file = new File(downloadSavePath);
+        if (!file.exists()) {
+            if (file.mkdirs()){
+                Log.d(TAG, "getDownloadSavePath: 创建下载保存目录成功！");
+            }
+        }
+        return downloadSavePath;
     }
 }

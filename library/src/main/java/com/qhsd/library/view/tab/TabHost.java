@@ -39,8 +39,7 @@ public class TabHost {
     private void initView() {
         rootView = new LinearLayout(context);
         rootView.setOrientation(LinearLayout.HORIZONTAL);
-        rootView.setId(R.id.linear_tab);
-
+        rootView.setId(R.id.tab_linear);
         RelativeLayout.LayoutParams rootViewLp = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         rootViewLp.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
         rootView.setLayoutParams(rootViewLp);
@@ -51,10 +50,8 @@ public class TabHost {
             return;
         }
         tabList.add(tab);
-
         LinearLayout tabRootView = tab.getRootView();
         rootView.addView(tabRootView);
-
         addTabChangeListener(tab);
     }
 

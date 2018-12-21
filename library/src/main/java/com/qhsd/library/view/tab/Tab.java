@@ -10,6 +10,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.qhsd.library.R;
+import com.qhsd.library.utils.ScreenUtils;
 
 
 /**
@@ -92,7 +93,7 @@ public class Tab {
         LinearLayout.LayoutParams rootViewLp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         rootViewLp.weight = 1;
         rootView.setOrientation(LinearLayout.VERTICAL);
-        rootView.setPadding(0,10,0,10);
+        rootView.setPadding(0, ScreenUtils.dp2px(context,8),0,ScreenUtils.dp2px(context,8));
         rootView.setLayoutParams(rootViewLp);
         textTextView = new TextView(context);
         iconImageView = new ImageView(context);

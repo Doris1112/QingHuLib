@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.qhsd.library.view.tab.TabContainerView
+        android:id="@+id/main_tab_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:isScrollContainer="false"
+        app:divideLineColor="@color/gray_c"
+        app:divideLineHeight="0.3dp"
+        app:drawablePadding="@dimen/dp_2"
+        app:iconHeight="@dimen/dp_20"
+        app:iconWidth="@dimen/dp_20"
+        app:tabTextColor="@color/gray_6"
+        app:selectedTextColor="@android:color/black"
+        app:tabTextSize="@dimen/text_size_10"/>
+
+</LinearLayout>

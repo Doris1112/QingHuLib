@@ -81,15 +81,15 @@ public class TabContainerView extends RelativeLayout {
     }
 
     private void initStyle(Context context, AttributeSet attrs) {
-        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.TabContainerViewStyle);
-        textColor = typedArray.getColor(R.styleable.TabContainerViewStyle_tabTextColor, Color.GRAY);
-        selectedTextColor = typedArray.getColor(R.styleable.TabContainerViewStyle_selectedTextColor, Color.BLACK);
-        textSize = typedArray.getDimensionPixelSize(R.styleable.TabContainerViewStyle_tabTextSize, 0);
-        drawablePadding = typedArray.getDimensionPixelSize(R.styleable.TabContainerViewStyle_drawablePadding, 0);
-        iconHeight = typedArray.getDimensionPixelSize(R.styleable.TabContainerViewStyle_iconHeight, 0);
-        iconWidth = typedArray.getDimensionPixelSize(R.styleable.TabContainerViewStyle_iconWidth, 0);
-        divideLineColor = typedArray.getColor(R.styleable.TabContainerViewStyle_divideLineColor, Color.BLACK);
-        divideLineHeight = typedArray.getDimensionPixelSize(R.styleable.TabContainerViewStyle_divideLineHeight, ScreenUtils.dp2px(context, 1));
+        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.TabContainerView);
+        textColor = typedArray.getColor(R.styleable.TabContainerView_tabTextColor, Color.GRAY);
+        selectedTextColor = typedArray.getColor(R.styleable.TabContainerView_selectedTextColor, Color.BLACK);
+        textSize = typedArray.getDimensionPixelSize(R.styleable.TabContainerView_tabTextSize, 0);
+        drawablePadding = typedArray.getDimensionPixelSize(R.styleable.TabContainerView_drawablePadding, 0);
+        iconHeight = typedArray.getDimensionPixelSize(R.styleable.TabContainerView_iconHeight, 0);
+        iconWidth = typedArray.getDimensionPixelSize(R.styleable.TabContainerView_iconWidth, 0);
+        divideLineColor = typedArray.getColor(R.styleable.TabContainerView_divideLineColor, Color.BLACK);
+        divideLineHeight = typedArray.getDimensionPixelSize(R.styleable.TabContainerView_divideLineHeight, ScreenUtils.dp2px(context, 1));
 
         typedArray.recycle();
     }
@@ -102,10 +102,10 @@ public class TabContainerView extends RelativeLayout {
 
     private void initDivideLine(Context context) {
         View divideLine = new View(context);
-        divideLine.setId(R.id.divide_tab);
+        divideLine.setId(R.id.tab_divide);
         divideLine.setBackgroundColor(divideLineColor);
         LayoutParams lineLp = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, divideLineHeight);
-        lineLp.addRule(RelativeLayout.ABOVE, R.id.linear_tab);
+        lineLp.addRule(RelativeLayout.ABOVE, R.id.tab_linear);
         divideLine.setLayoutParams(lineLp);
         addView(divideLine);
     }
@@ -114,10 +114,10 @@ public class TabContainerView extends RelativeLayout {
         contentViewPager = new CustomViewPager(context);
         contentViewPager.setScanScroll(false);
         LayoutParams contentVpLp = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-        contentVpLp.addRule(RelativeLayout.ABOVE, R.id.divide_tab);
+        contentVpLp.addRule(RelativeLayout.ABOVE, R.id.tab_divide);
         contentViewPager.setLayoutParams(contentVpLp);
-        contentViewPager.setId(R.id.viewpager_tab);
-        contentViewPager.setOffscreenPageLimit(4);
+        contentViewPager.setId(R.id.tab_pager);
+        contentViewPager.setOffscreenPageLimit(5);
         contentViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -136,7 +136,6 @@ public class TabContainerView extends RelativeLayout {
             public void onPageScrollStateChanged(int state) {
             }
         });
-
         addView(contentViewPager);
     }
 
@@ -149,9 +148,7 @@ public class TabContainerView extends RelativeLayout {
             return;
         }
         tabHost.addTabs(baseAdapter, textSize, textColor, selectedTextColor, drawablePadding, iconWidth, iconHeight);
-
         contentViewPager.setAdapter(new TabViewPagerAdapter(baseAdapter.getFragmentManager(), baseAdapter.getFragmentArray()));
-
         setCurrentItem(index);
     }
 

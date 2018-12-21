@@ -1,16 +1,21 @@
 package com.qhsd.library.base.web;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.widget.ProgressBar;
 
+import com.qhsd.library.R;
 import com.qhsd.library.base.BaseLibActivity;
+import com.qhsd.library.base.BaseLibApplication;
 import com.qhsd.library.base.BaseNumber;
 import com.qhsd.library.helper.AndroidStatusBugWorkaround;
 import com.qhsd.library.utils.ToastUtils;
@@ -23,11 +28,31 @@ import com.tencent.smtt.export.external.extension.interfaces.IX5WebViewExtension
 
 public abstract class BaseLibWebActivity extends BaseLibActivity {
 
+    protected WebView mWebView;
+    protected com.tencent.smtt.sdk.WebView mX5WebView;
+    protected ProgressBar mWebProgress;
+
+    protected CustomWebChromeClient mWebChromeClient;
+    protected CustomX5WebChromeClient mX5WebChromeClient;
+
     @Override
     protected void initViewBefore() {
         super.initViewBefore();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        }
+    }
+
+    @Override
+    protected void initView() {
+        super.initView();
+        mWebView = findViewById(R.id.web);
+        mX5WebView = findViewById(R.id.web_x5);
+        mWebProgress = findViewById(R.id.web_progress);
+        if (BaseLibApplication.isInitX5EnvironmentSuccess){
+            initBaseX5WebView(mX5WebView);
+        } else {
+            initBaseWebView(mWebView);
         }
     }
 
@@ -43,6 +68,10 @@ public abstract class BaseLibWebActivity extends BaseLibActivity {
         // 为防止键盘弹出挡住页面
         AndroidStatusBugWorkaround.assistActivity(this);
 
+        if (mX5WebView != null){
+            mX5WebView.setVisibility(View.GONE);
+        }
+        webView.setVisibility(View.VISIBLE);
         webView.clearCache(true);
         webView.clearHistory();
         webView.clearFormData();
@@ -79,6 +108,18 @@ public abstract class BaseLibWebActivity extends BaseLibActivity {
         // 设置支持DOM storage API
         webSettings.setDomStorageEnabled(true);
         webView.requestFocus();
+
+        mWebChromeClient = getCustomWebChromeClient();
+        webView.setWebChromeClient(mWebChromeClient);
+        webView.setWebViewClient(getCustomWebViewClient());
+    }
+
+    protected CustomWebChromeClient getCustomWebChromeClient(){
+        return new CustomWebChromeClient(this, mWebProgress);
+    }
+
+    protected CustomWebViewClient getCustomWebViewClient(){
+        return new CustomWebViewClient(this, mWebProgress);
     }
 
     /**
@@ -91,6 +132,10 @@ public abstract class BaseLibWebActivity extends BaseLibActivity {
             return;
         }
 
+        if (mWebView != null){
+            mWebView.setVisibility(View.GONE);
+        }
+        webView.setVisibility(View.VISIBLE);
         webView.clearCache(true);
         webView.clearHistory();
         webView.clearFormData();
@@ -130,17 +175,27 @@ public abstract class BaseLibWebActivity extends BaseLibActivity {
         webSettings.setDefaultTextEncodingName("utf-8");
         // 设置支持DOM storage API
         webSettings.setDomStorageEnabled(true);
+
+        mX5WebChromeClient = getCustomX5WebChromeClient();
+        webView.setWebChromeClient(mX5WebChromeClient);
+        webView.setWebViewClient(getCustomX5WebViewClient());
     }
 
-    /**
-     * 获取相机权限
-     */
-    protected final void initPermissionForCamera() {
-        int flag = ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA);
-        if (PackageManager.PERMISSION_GRANTED != flag) {
-            ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.CAMERA},
-                    BaseNumber.REQUEST_CODE_PERMISSION_CAMERA);
+    protected CustomX5WebChromeClient getCustomX5WebChromeClient(){
+        return new CustomX5WebChromeClient(this, mWebProgress);
+    }
+
+    protected CustomX5WebViewClient getCustomX5WebViewClient(){
+        return new CustomX5WebViewClient(this, mWebProgress);
+    }
+
+    protected void setWebUrl(String url){
+        if (BaseLibApplication.isInitX5EnvironmentSuccess){
+            Log.d(TAG, "setWebUrl: isInitX5EnvironmentSuccess = true");
+            mX5WebView.loadUrl(url);
+        } else {
+            Log.d(TAG, "setWebUrl: isInitX5EnvironmentSuccess = false");
+            mWebView.loadUrl(url);
         }
     }
 
@@ -166,7 +221,7 @@ public abstract class BaseLibWebActivity extends BaseLibActivity {
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+    public final void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == BaseNumber.REQUEST_CODE_PERMISSION_WRITE_EXTERNAL_STORAGE) {
             if (grantResults.length == 0) {
@@ -177,24 +232,28 @@ public abstract class BaseLibWebActivity extends BaseLibActivity {
             } else {
                 ToastUtils.showToastCenter(this, "无法获取读写入权限！");
             }
-        } else if (BaseNumber.REQUEST_CODE_PERMISSION_CAMERA == requestCode) {
-            if (grantResults.length == 0) {
-                return;
-            }
-            switch (grantResults[0]) {
-                case PackageManager.PERMISSION_DENIED:
-                    boolean isSecondRequest = ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CAMERA);
-                    if (isSecondRequest) {
-                        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA},
-                                BaseNumber.REQUEST_CODE_PERMISSION_CAMERA);
-                    } else {
-                        ToastUtils.showToastCenter(this, "拍照权限被禁用，请在权限管理修改！");
-                    }
-                    break;
-                default:
-                    break;
-            }
+        } else {
+            onBaseRequestPermissionsResult(requestCode, permissions, grantResults);
         }
     }
 
+    protected void onBaseRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults){
+
+    }
+
+    @Override
+    protected final void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (mWebChromeClient != null && mWebChromeClient.onChooseResult(requestCode, data)){
+            Log.d(TAG, "onActivityResult: mWebChromeClient.onChooseResult 已处理");
+        } else if (mX5WebChromeClient != null && mX5WebChromeClient.onChooseResult(requestCode, data)){
+            Log.d(TAG, "onActivityResult: mX5WebChromeClient.onChooseResult 已处理");
+        } else {
+            onBaseActivityResult(requestCode, resultCode, data);
+        }
+    }
+
+    protected void onBaseActivityResult(int requestCode, int resultCode, Intent data){
+
+    }
 }
