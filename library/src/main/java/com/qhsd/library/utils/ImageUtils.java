@@ -8,7 +8,13 @@ import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.util.Base64;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.transition.Transition;
 
 import java.io.FileOutputStream;
 
@@ -21,14 +27,11 @@ public class ImageUtils {
 
     /**
      * 保存图片
-     *
-     * @param bitmap
-     * @param path
      */
-    public static boolean saveImg(Bitmap bitmap, String path) {
+    public static boolean saveImg(Bitmap bitmap, String path, Bitmap.CompressFormat format, int quality) {
         try {
             FileOutputStream fileOutputStream = new FileOutputStream(path);
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fileOutputStream);
+            bitmap.compress(format, quality, fileOutputStream);
             fileOutputStream.close();
             return true;
         } catch (Exception e) {
@@ -39,9 +42,6 @@ public class ImageUtils {
 
     /**
      * 将字符串转换成Bitmap类型
-     *
-     * @param string
-     * @return
      */
     public static Bitmap stringToBitmap(String string) {
         Bitmap bitmap = null;
@@ -60,9 +60,6 @@ public class ImageUtils {
 
     /**
      * 同步媒体库
-     *
-     * @param context
-     * @param filePath
      */
     public static void updateFileFromDatabase(Context context, String filePath) {
         try {
@@ -83,4 +80,21 @@ public class ImageUtils {
         }
     }
 
+    /**
+     * 获取图片的宽高
+     */
+    public static void getImageWidthWithHeight(Context context, String url, final GetImageWidthWithHeightCallback callback){
+        Glide.with(context).asBitmap().load(url).into(new SimpleTarget<Bitmap>() {
+            @Override
+            public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+                if (callback != null){
+                    callback.onGet(resource.getWidth(), resource.getHeight());
+                }
+            }
+        });
+    }
+
+    public interface GetImageWidthWithHeightCallback{
+        void onGet(int width, int height);
+    }
 }
