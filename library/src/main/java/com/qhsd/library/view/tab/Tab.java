@@ -1,6 +1,7 @@
 package com.qhsd.library.view.tab;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,7 +28,7 @@ public class Tab {
     private boolean isSelected;
 
     /**
-     *  文本信息
+     * 文本信息
      */
     private String text;
     private int textColor;
@@ -37,7 +38,7 @@ public class Tab {
 
 
     /**
-     *  icon信息
+     * icon信息
      */
     private int iconImage;
     private int selectedIconImage;
@@ -45,7 +46,7 @@ public class Tab {
     private int iconWidth;
 
     /**
-     *  Tab布局信息
+     * Tab布局信息
      */
     private RelativeLayout childView;
     private LinearLayout rootView;
@@ -54,7 +55,7 @@ public class Tab {
     private boolean hasMsg;
 
     /**
-     *  tab选中监听
+     * tab选中监听
      */
     private OnTabSelectedListener onTabSelectedListener;
 
@@ -64,14 +65,14 @@ public class Tab {
         this.textSize = textSize;
         this.textColor = textColor;
         this.selectedTextColor = selectedTextColor;
-        this.drawablePadding=drawablePadding;
+        this.drawablePadding = drawablePadding;
 
         this.iconImage = iconImage;
         this.selectedIconImage = selectedIconImage;
         this.index = index;
-        this.iconHeight=iconHeight;
-        this.iconWidth=iconWidth;
-        this.hasMsg=hasMsg;
+        this.iconHeight = iconHeight;
+        this.iconWidth = iconWidth;
+        this.hasMsg = hasMsg;
 
         init();
     }
@@ -89,12 +90,13 @@ public class Tab {
 
     private void initView() {
         rootView = new LinearLayout(context);
-        childView=new RelativeLayout(context);
+        childView = new RelativeLayout(context);
         LinearLayout.LayoutParams rootViewLp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         rootViewLp.weight = 1;
         rootView.setOrientation(LinearLayout.VERTICAL);
-        rootView.setPadding(0, ScreenUtils.dp2px(context,8),0,ScreenUtils.dp2px(context,8));
+        rootView.setPadding(0, ScreenUtils.dp2px(context, 5), 0, ScreenUtils.dp2px(context, 5));
         rootView.setLayoutParams(rootViewLp);
+        rootView.setBackgroundColor(Color.WHITE);
         textTextView = new TextView(context);
         iconImageView = new ImageView(context);
 
@@ -102,10 +104,10 @@ public class Tab {
          *  icon view
          */
         iconImageView.setImageResource(iconImage);
-        RelativeLayout.LayoutParams iconParam=new RelativeLayout.LayoutParams(iconWidth==0? ViewGroup.LayoutParams.WRAP_CONTENT:iconWidth,iconHeight==0? ViewGroup.LayoutParams.WRAP_CONTENT:iconHeight);
+        RelativeLayout.LayoutParams iconParam = new RelativeLayout.LayoutParams(iconWidth == 0 ? ViewGroup.LayoutParams.WRAP_CONTENT : iconWidth, iconHeight == 0 ? ViewGroup.LayoutParams.WRAP_CONTENT : iconHeight);
         iconParam.addRule(RelativeLayout.CENTER_HORIZONTAL);
         iconImageView.setLayoutParams(iconParam);
-        iconImageView.setId(index+1);
+        iconImageView.setId(index + 1);
         childView.addView(iconImageView);
 
         /**
@@ -113,23 +115,23 @@ public class Tab {
          */
         textTextView.setText(text);
         textTextView.setTextColor(textColor);
-        textTextView.setTextSize(TypedValue.COMPLEX_UNIT_PX,textSize);
-        textTextView.setPadding(0,drawablePadding,0,0);
-        RelativeLayout.LayoutParams txParam=new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-        txParam.addRule(RelativeLayout.BELOW,childView.getChildAt(0).getId());
+        textTextView.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
+        textTextView.setPadding(0, drawablePadding, 0, 0);
+        RelativeLayout.LayoutParams txParam = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        txParam.addRule(RelativeLayout.BELOW, childView.getChildAt(0).getId());
         txParam.addRule(RelativeLayout.CENTER_HORIZONTAL);
         textTextView.setLayoutParams(txParam);
         childView.addView(textTextView);
 
-        if(hasMsg){
-            ImageView circleView=new ImageView(context);
-            RelativeLayout.LayoutParams param = new RelativeLayout.LayoutParams(30,30);
-            param.addRule(RelativeLayout.RIGHT_OF,iconImageView.getId());
+        if (hasMsg) {
+            ImageView circleView = new ImageView(context);
+            RelativeLayout.LayoutParams param = new RelativeLayout.LayoutParams(30, 30);
+            param.addRule(RelativeLayout.RIGHT_OF, iconImageView.getId());
             circleView.setBackgroundResource(R.drawable.lib_red_circle);
             circleView.setLayoutParams(param);
             childView.addView(circleView);
         }
-        RelativeLayout.LayoutParams childParam=new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        RelativeLayout.LayoutParams childParam = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         childView.setLayoutParams(childParam);
         rootView.addView(childView);
 
