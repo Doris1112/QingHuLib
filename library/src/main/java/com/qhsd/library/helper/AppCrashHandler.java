@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 
-import com.qhsd.library.utils.ILogUtils;
+import com.qhsd.library.utils.LogUtils;
 
 /**
  * @author Doris.
@@ -16,15 +16,10 @@ public class AppCrashHandler implements Thread.UncaughtExceptionHandler {
     private Thread.UncaughtExceptionHandler mDefaultHandler;
     private static AppCrashHandler instance;
     private Context mContext;
-    private ILogUtils mLogUtils;
 
-    private AppCrashHandler(ILogUtils logUtils) {
-        this.mLogUtils = logUtils;
-    }
-
-    public static AppCrashHandler getInstance(ILogUtils logUtils) {
+    public static AppCrashHandler getInstance() {
         if (instance == null) {
-            instance = new AppCrashHandler(logUtils);
+            instance = new AppCrashHandler();
         }
         return instance;
     }
@@ -65,7 +60,7 @@ public class AppCrashHandler implements Thread.UncaughtExceptionHandler {
             PackageManager pm = ctx.getPackageManager();
             PackageInfo pi = pm.getPackageInfo(ctx.getPackageName(), PackageManager.GET_ACTIVITIES);
             if (pi != null) {
-                mLogUtils.writeLog("程序崩溃！版本号:　" + pi.versionName, ex);
+                LogUtils.getInstance().writeLog("程序崩溃！版本号:　" + pi.versionName, ex);
                 ex.printStackTrace();
             }
         } catch (Exception e) {

@@ -4,6 +4,7 @@ import android.os.Environment;
 import android.support.multidex.MultiDexApplication;
 import android.util.Log;
 
+import com.qhsd.library.helper.AppCrashHandler;
 import com.qhsd.library.helper.ScreenAdaptation;
 import com.qhsd.library.utils.ScreenUtils;
 import com.tencent.smtt.sdk.QbSdk;
@@ -27,6 +28,8 @@ public class BaseLibApplication extends MultiDexApplication {
     @Override
     public void onCreate() {
         super.onCreate();
+        // 捕获异常帮助类
+        AppCrashHandler.getInstance().init(this);
         // 适配 需要传入ui设计给的大小,初始化
         if (ScreenUtils.getScreenWidth(this) < mScreenWidth) {
             new ScreenAdaptation(this, mScreenWidth, mScreenHeight).register();
@@ -59,7 +62,7 @@ public class BaseLibApplication extends MultiDexApplication {
      */
     public static String getDownloadSavePath(){
         String downloadSavePath = Environment.getExternalStorageDirectory().getAbsolutePath()
-                + "/Loan/download/";
+                + "/qhsd/download/";
         File file = new File(downloadSavePath);
         if (!file.exists()) {
             if (file.mkdirs()){

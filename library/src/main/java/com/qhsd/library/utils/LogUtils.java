@@ -1,5 +1,8 @@
 package com.qhsd.library.utils;
 
+import android.os.Environment;
+import android.util.Log;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -14,12 +17,19 @@ import java.util.Locale;
  * @author Doris
  * @date 2018/12/13
  **/
-public abstract class ILogUtils {
+public class LogUtils {
 
-    /**
-     * 日志保存路径
-     */
-    protected abstract String getLogSavePath();
+    private static final String TAG = "qhsd";
+
+    private static LogUtils instance;
+
+    public static LogUtils getInstance(){
+        if (instance == null){
+            instance = new LogUtils();
+        }
+        return instance;
+    }
+
     /**
      * 日志开关
      */
@@ -168,5 +178,20 @@ public abstract class ILogUtils {
             e.printStackTrace();
         }
         return false;
+    }
+
+    /**
+     * 日志保存路径
+     */
+    private String getLogSavePath(){
+        String downloadSavePath = Environment.getExternalStorageDirectory().getAbsolutePath()
+                + "/qhsd/log/";
+        File file = new File(downloadSavePath);
+        if (!file.exists()) {
+            if (file.mkdirs()){
+                Log.d(TAG, "getDownloadSavePath: 创建日志保存目录成功！");
+            }
+        }
+        return downloadSavePath;
     }
 }
