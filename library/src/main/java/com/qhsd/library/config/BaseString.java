@@ -15,7 +15,9 @@ public class BaseString {
     public static final String USER_AVATAR = "avatar";
 
     public static final String CONFIG_INFO = "config";
-    public static final String CONTACT_MOBILE = "contactMobile";
+    public static final String NEED_HIDE = "needHide";
+    public static final String IS_FIRST_IN = "isFirst";
+    public static final String CONTACT_MOBILE = "ContactMobile";
     public static final String WE_CHAT_NUM = "WeChat";
     public static final String WE_CHAT_GZH = "WeChatGZH";
     public static final String WE_CHAT_QR = "WeChatQR";

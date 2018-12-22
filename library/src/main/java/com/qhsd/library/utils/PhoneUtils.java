@@ -7,6 +7,7 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.telephony.TelephonyManager;
 
 /**
@@ -58,5 +59,19 @@ public class PhoneUtils {
             e.printStackTrace();
             return "";
         }
+    }
+
+    /**
+     * 检查是否拥有指定的权限
+     * @param permissions 权限数组
+     * @return 拥有：true，不拥有：false
+     */
+    public static boolean checkPermissionAllGranted(Context context, String[] permissions) {
+        for (String permission : permissions) {
+            if (ContextCompat.checkSelfPermission(context, permission) != PackageManager.PERMISSION_GRANTED) {
+                return false;
+            }
+        }
+        return true;
     }
 }

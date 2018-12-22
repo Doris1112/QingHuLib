@@ -2,50 +2,49 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:clipToPadding="true"
     android:fitsSystemWindows="true"
+    android:gravity="center"
     android:orientation="vertical">
 
     <Button
         android:id="@+id/button1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/lib_DefaultBtn"
         android:onClick="onMainViewClick"
-        android:text="Toast"/>
+        android:text="Toast" />
 
     <Button
         android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/lib_DefaultBtn"
+        android:layout_margin="@dimen/dp_10"
         android:onClick="onMainViewClick"
-        android:text="ProgressDialog"/>
+        android:text="ProgressDialog" />
 
     <Button
         android:id="@+id/button3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/lib_DefaultBtn"
+        android:layout_margin="@dimen/dp_10"
         android:onClick="onMainViewClick"
-        android:text="Main2"/>
+        android:text="Main2" />
 
     <Button
         android:id="@+id/button4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/lib_DefaultBtn"
+        android:layout_margin="@dimen/dp_10"
         android:onClick="onMainViewClick"
-        android:text="Web"/>
+        android:text="Web" />
 
     <Button
         android:id="@+id/button5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/lib_DefaultBtn"
+        android:layout_margin="@dimen/dp_10"
         android:onClick="onMainViewClick"
-        android:text="Image"/>
+        android:text="Image" />
 
     <ImageView
         android:id="@+id/image1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:contentDescription="@string/app_name"/>
+        android:contentDescription="@string/app_name" />
 
 </LinearLayout>

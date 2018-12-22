@@ -4,6 +4,7 @@
     <color name="default_bg">#F2F2F2</color>
     <color name="default_color">#007FFF</color>
     <color name="default_color_alpha60">#60007FFF</color>
+    <color name="default_color_dark">#0160BE</color>
 
     <color name="gray_3">#333333</color>
     <color name="gray_6">#666666</color>

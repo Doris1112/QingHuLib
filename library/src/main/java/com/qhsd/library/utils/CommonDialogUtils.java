@@ -22,6 +22,9 @@ public class CommonDialogUtils {
      */
     public interface CommonDialogCallback {
 
+        /**
+         * 点击事件
+         */
         void onClick();
     }
 
@@ -61,21 +64,11 @@ public class CommonDialogUtils {
     }
 
     private static Dialog getDialog(Activity activity, View view) {
-        Dialog dialog = new Dialog(activity);
+        Dialog dialog = new Dialog(activity, R.style.lib_DefaultDialogStyle);
         dialog.setContentView(view);
-        dialog.setCanceledOnTouchOutside(true);
         Window window = dialog.getWindow();
         if (window != null) {
-            window.setBackgroundDrawableResource(android.R.color.transparent);
-            WindowManager m = activity.getWindowManager();
-            DisplayMetrics outMetrics = new DisplayMetrics();
-            m.getDefaultDisplay().getMetrics(outMetrics);
-            //获取对话框当前的参数值
-            WindowManager.LayoutParams p = window.getAttributes();
-            //宽度设置为屏幕的0.8
-            p.width = (int) (outMetrics.widthPixels * 0.8);
-            //设置生效
-            window.setAttributes(p);
+            window.getAttributes().width = (int) (ScreenUtils.getScreenWidth(activity) * 0.8);
             dialog.show();
         }
         return dialog;

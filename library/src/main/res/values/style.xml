@@ -11,4 +11,52 @@
         <item name="android:windowExitAnimation">@anim/lib_fade_out_anim</item>
     </style>
 
+
+    <style name="lib_SplashTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
+    <style name="lib_AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/default_color</item>
+        <item name="colorPrimaryDark">@color/default_color</item>
+        <item name="colorAccent">@color/default_color</item>
+    </style>
+
+    <style name="lib_DefaultDialogStyle" parent="@android:style/Theme.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowFrame">@null</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
+
+    <style name="lib_DefaultBtn">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">@dimen/dp_40</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:paddingLeft">@dimen/dp_10</item>
+        <item name="android:paddingRight">@dimen/dp_10</item>
+        <item name="android:textSize">@dimen/text_size_16</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">@drawable/lib_selector_btn</item>
+    </style>
+
+    <style name="lib_RelativeLayoutRowHeight40BackgroundWhite">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/dp_40</item>
+        <item name="android:background">@android:color/white</item>
+        <item name="android:gravity">center_vertical</item>
+    </style>
+
+    <style name="lib_WrapContentWH">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="lib_WrapContentWHNoPadding" parent="lib_WrapContentWH">
+        <item name="android:includeFontPadding">false</item>
+    </style>
 </resources>

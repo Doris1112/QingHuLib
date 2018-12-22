@@ -46,6 +46,6 @@
         android:layout_marginTop="@dimen/dp_69"
         android:max="100"
         android:progress="0"
-        android:progressDrawable="@drawable/lib_web_progress" />
+        android:progressDrawable="@drawable/lib_progress_web" />
 
 </RelativeLayout>

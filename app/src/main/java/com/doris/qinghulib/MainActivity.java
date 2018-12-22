@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
         switch (view.getId()) {
             case R.id.button1:
                 ToastUtils.showToastCenter(this, "123");
+                ProgressDialogUtils.showDialog(this, "检查中...");
                 break;
             case R.id.button2:
                 ProgressDialogUtils.showDialog(this);

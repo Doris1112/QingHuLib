@@ -28,7 +28,7 @@
         android:gravity="center"
         android:padding="@dimen/dp_15"
         android:textColor="@color/gray_6"
-        android:textSize="@dimen/text_size_15" />
+        android:textSize="@dimen/text_size_17" />
 
     <View
         android:layout_width="match_parent"
@@ -42,12 +42,11 @@
 
         <TextView
             android:id="@+id/lib_common_cancel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:includeFontPadding="false"
+            style="@style/lib_WrapContentWHNoPadding"
             android:layout_weight="1"
             android:gravity="center"
             android:padding="@dimen/dp_10"
+            android:background="@drawable/lib_selector_dialog_btn_left"
             android:text="@string/lib_cancel"
             android:textColor="@color/gray_9"
             android:textSize="@dimen/text_size_17" />
@@ -59,11 +58,10 @@
 
         <TextView
             android:id="@+id/lib_common_sure"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:includeFontPadding="false"
+            style="@style/lib_WrapContentWHNoPadding"
             android:layout_weight="1"
             android:gravity="center"
+            android:background="@drawable/lib_selector_dialog_btn_right"
             android:padding="@dimen/dp_10"
             android:text="@string/lib_sure"
             android:textColor="@color/default_color"
