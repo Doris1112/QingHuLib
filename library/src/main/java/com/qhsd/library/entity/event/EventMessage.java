@@ -1,5 +1,8 @@
 package com.qhsd.library.entity.event;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * @author Doris.
  * @date 2018/12/19.
@@ -11,6 +14,8 @@ public class EventMessage {
     private String type;
     private int typeInt;
     private boolean flag;
+
+    private Map<String, Object> extra;
 
     public EventMessage(String pager, String type) {
         this.pager = pager;
@@ -76,5 +81,31 @@ public class EventMessage {
 
     public void setFlag(boolean flag) {
         this.flag = flag;
+    }
+
+    public Map<String, Object> getExtra() {
+        if (extra == null) {
+            extra = new HashMap<>(0);
+        }
+        return extra;
+    }
+
+    public void setExtra(Map<String, Object> extra) {
+        this.extra = extra;
+    }
+
+    public EventMessage putExtra(String key, Object value) {
+        if (extra == null) {
+            extra = new HashMap<>(0);
+        }
+        extra.put(key, value);
+        return this;
+    }
+
+    public EventMessage removeExtra(String key) {
+        if (extra != null) {
+            extra.remove(key);
+        }
+        return this;
     }
 }
