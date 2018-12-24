@@ -13,6 +13,7 @@ public class SignInInfo {
     private String Summary;
     private String CurrentMonth;
     private List<SignInHistory> SignIns;
+    private List<String> Rules;
 
     public double getPendingAmount() {
         return PendingAmount;
@@ -44,5 +45,13 @@ public class SignInInfo {
 
     public void setSignIns(List<SignInHistory> signIns) {
         SignIns = signIns;
+    }
+
+    public List<String> getRules() {
+        return Rules;
+    }
+
+    public void setRules(List<String> rules) {
+        Rules = rules;
     }
 }
