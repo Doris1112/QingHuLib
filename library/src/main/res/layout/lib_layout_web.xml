@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/lib_base_title"
+        layout="@layout/lib_layout_title" />
+
+    <WebView
+        android:id="@+id/lib_web"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/lib_base_title" />
+
+    <com.tencent.smtt.sdk.WebView
+        android:id="@+id/lib_web_x5"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/lib_base_title" />
+
+    <ProgressBar
+        android:id="@+id/lib_web_progress"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_3"
+        android:layout_below="@+id/lib_base_title"
+        android:max="100"
+        android:progress="0"
+        android:progressDrawable="@drawable/lib_progress_web" />
+</RelativeLayout>

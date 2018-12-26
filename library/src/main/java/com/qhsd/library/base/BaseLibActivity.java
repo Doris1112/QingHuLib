@@ -1,12 +1,15 @@
 package com.qhsd.library.base;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -21,10 +24,13 @@ import com.qhsd.library.utils.ProgressDialogUtils;
  */
 public abstract class BaseLibActivity extends AppCompatActivity {
 
-    protected static final String TAG = "qhsd";
+    protected static final String TAG = "QingHuShiDai";
 
-    protected LinearLayout mBackLayout, mRightLayout;
-    protected TextView mTitleName, mRightText;
+    protected FrameLayout mTitleLayout;
+    protected LinearLayout mLeftLayout, mRightLayout;
+    protected ImageView mLeftIcon;
+    protected TextView mTitleView, mRightText;
+    protected View mTitleLine;
 
     /**
      * 防止连续点击跳转两个页面
@@ -59,23 +65,14 @@ public abstract class BaseLibActivity extends AppCompatActivity {
 
     }
 
-    private void initBaseItemView(){
-        mBackLayout = findViewById(R.id.item_title_back_layout);
-        mTitleName = findViewById(R.id.item_title_name);
-        mRightLayout = findViewById(R.id.item_title_right_layout);
-        mRightText = findViewById(R.id.item_title_right_tv);
-
-        if (mBackLayout != null){
-            mBackLayout.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    InputMethodManager manager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
-                    manager.hideSoftInputFromWindow(v.getWindowToken(), 0);
-                    AppManager.getAppManager().finishActivity(BaseLibActivity.this);
-                    finish();
-                }
-            });
-        }
+    private void initBaseItemView() {
+        mTitleLayout = findViewById(R.id.lib_layout_title);
+        mLeftLayout = findViewById(R.id.lib_title_left);
+        mLeftIcon = findViewById(R.id.lib_title_left_icon);
+        mTitleView = findViewById(R.id.lib_title);
+        mRightLayout = findViewById(R.id.lib_title_right_layout);
+        mRightText = findViewById(R.id.lib_title_right_text);
+        mTitleLine = findViewById(R.id.lib_title_line);
     }
 
     protected void initView() {
@@ -87,22 +84,85 @@ public abstract class BaseLibActivity extends AppCompatActivity {
     }
 
     /**
-     * 设置标题
+     * 设置标题栏背景图片
      *
-     * @param title 标题
+     * @param resId 图片资源Id
      */
-    protected void setTitle(String title){
-        if (mTitleName != null){
-            mTitleName.setText(title);
+    protected final void setTitleLayoutBackgroundImage(int resId) {
+        if (mTitleLayout != null) {
+            mTitleLayout.setBackgroundResource(resId);
+        }
+    }
+
+    /**
+     * 设置标题栏背景颜色
+     *
+     * @param color 颜色值
+     */
+    protected final void setTitleLayoutBackgroundColor(int color) {
+        if (mTitleLayout != null) {
+            mTitleLayout.setBackgroundColor(color);
         }
     }
 
     /**
      * 设置左边按钮显示
      */
-    protected void setLeftBtnVisible(){
-        if (mBackLayout != null){
-            mBackLayout.setVisibility(View.VISIBLE);
+    protected final void setLeftBtnVisible() {
+        if (mLeftLayout != null) {
+            mLeftLayout.setVisibility(View.VISIBLE);
+        }
+    }
+
+    /**
+     * 设置左边按钮隐藏
+     */
+    protected final void setLeftBtnGone() {
+        if (mLeftLayout != null) {
+            mLeftLayout.setVisibility(View.GONE);
+        }
+    }
+
+    /**
+     * 左边图片按钮（一般是返回按钮）
+     *
+     * @param resId 图片资源Id
+     */
+    protected final void setLeftIcon(int resId) {
+        if (mLeftIcon != null) {
+            mLeftIcon.setImageResource(resId);
+        }
+        setLeftBtnOnClick(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                InputMethodManager manager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+                if (manager != null) {
+                    manager.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                }
+                AppManager.getAppManager().finishActivity(BaseLibActivity.this);
+                finish();
+            }
+        });
+    }
+
+    /**
+     * 设置左边按钮点击事件
+     * @param listener 点击事件
+     */
+    protected final void setLeftBtnOnClick(View.OnClickListener listener) {
+        if (mLeftLayout != null) {
+            mLeftLayout.setOnClickListener(listener);
+        }
+    }
+
+    /**
+     * 设置标题
+     *
+     * @param title 标题
+     */
+    protected final void setTitle(String title) {
+        if (mTitleView != null) {
+            mTitleView.setText(title);
         }
     }
 
@@ -112,11 +172,25 @@ public abstract class BaseLibActivity extends AppCompatActivity {
      *
      * @param text 右边文字
      */
-    protected void setRightText(String text) {
-        if (mRightText != null) {
+    protected final void setRightText(String text) {
+        if (mRightLayout != null && mRightText != null) {
             mRightLayout.setVisibility(View.VISIBLE);
             mRightText.setVisibility(View.VISIBLE);
             mRightText.setText(text);
+            mRightText.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
+        }
+    }
+
+    /**
+     * 设置右边图片
+     * @param drawable 图片
+     */
+    protected final void setRightIcon(Drawable drawable){
+        if (mRightLayout != null && mRightText != null) {
+            mRightLayout.setVisibility(View.VISIBLE);
+            mRightText.setVisibility(View.VISIBLE);
+            mRightText.setText("");
+            mRightText.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null);
         }
     }
 
@@ -125,10 +199,27 @@ public abstract class BaseLibActivity extends AppCompatActivity {
      *
      * @param onClickListener 点击事件
      */
-    protected void setRightOnclick(View.OnClickListener onClickListener) {
-        if (mRightLayout != null){
-            mRightLayout.setVisibility(View.VISIBLE);
+    protected final void setRightBtnOnClick(View.OnClickListener onClickListener) {
+        if (mRightLayout != null) {
             mRightLayout.setOnClickListener(onClickListener);
+        }
+    }
+
+    /**
+     * 设置标题下边线条显示
+     */
+    protected final void setTitleLineVisible(){
+        if (mTitleLine != null){
+            mTitleLine.setVisibility(View.VISIBLE);
+        }
+    }
+
+    /**
+     * 设置标题下边线条隐藏
+     */
+    protected final void setTitleLineGone(){
+        if (mTitleLine != null){
+            mTitleLine.setVisibility(View.GONE);
         }
     }
 
@@ -155,7 +246,7 @@ public abstract class BaseLibActivity extends AppCompatActivity {
      *
      * @return 是：true，不是：false
      */
-    protected boolean isFastDoubleClick() {
+    protected final boolean isFastDoubleClick() {
         long time = System.currentTimeMillis();
         if (time - mLastClickTime < mLastClickInterval) {
             return true;
@@ -164,7 +255,7 @@ public abstract class BaseLibActivity extends AppCompatActivity {
         return false;
     }
 
-    protected void startActivity(Class clz) {
+    protected final void startActivity(Class clz) {
         if (isFastDoubleClick()) {
             return;
         }
@@ -172,7 +263,7 @@ public abstract class BaseLibActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    protected void startActivity(Class clz, Bundle bundle) {
+    protected final void startActivity(Class clz, Bundle bundle) {
         if (isFastDoubleClick()) {
             return;
         }
@@ -181,7 +272,7 @@ public abstract class BaseLibActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    protected void startActivityForResult(Class clz, int requestCode) {
+    protected final void startActivityForResult(Class clz, int requestCode) {
         if (isFastDoubleClick()) {
             return;
         }
@@ -189,7 +280,7 @@ public abstract class BaseLibActivity extends AppCompatActivity {
         startActivityForResult(intent, requestCode);
     }
 
-    protected void startActivityForResult(Class clz, Bundle bundle, int requestCode) {
+    protected final void startActivityForResult(Class clz, Bundle bundle, int requestCode) {
         if (isFastDoubleClick()) {
             return;
         }

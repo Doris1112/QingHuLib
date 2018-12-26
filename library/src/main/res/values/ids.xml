@@ -5,13 +5,4 @@
     <item type="id" name="tab_linear"/>
     <item type="id" name="tab_divide"/>
     <item type="id" name="tab_pager"/>
-
-    <item type="id" name="item_title_back_layout"/>
-    <item type="id" name="item_title_name"/>
-    <item type="id" name="item_title_right_layout"/>
-    <item type="id" name="item_title_right_tv"/>
-
-    <item type="id" name="web_x5"/>
-    <item type="id" name="web"/>
-    <item type="id" name="web_progress"/>
 </resources>

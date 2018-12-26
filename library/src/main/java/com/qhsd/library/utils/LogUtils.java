@@ -19,7 +19,7 @@ import java.util.Locale;
  **/
 public class LogUtils {
 
-    private static final String TAG = "qhsd";
+    private static final String TAG = "QingHuShiDai";
 
     private static LogUtils instance;
 

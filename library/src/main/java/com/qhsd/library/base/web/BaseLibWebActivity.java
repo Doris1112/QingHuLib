@@ -26,7 +26,7 @@ import com.tencent.smtt.export.external.extension.interfaces.IX5WebViewExtension
  * @date 2018/12/14.
  */
 
-public abstract class BaseLibWebActivity extends BaseLibActivity {
+public class BaseLibWebActivity extends BaseLibActivity {
 
     protected WebView mWebView;
     protected com.tencent.smtt.sdk.WebView mX5WebView;
@@ -34,6 +34,11 @@ public abstract class BaseLibWebActivity extends BaseLibActivity {
 
     protected CustomWebChromeClient mWebChromeClient;
     protected CustomX5WebChromeClient mX5WebChromeClient;
+
+    @Override
+    protected int getLayoutResId() {
+        return R.layout.lib_layout_web;
+    }
 
     @Override
     protected void initViewBefore() {
@@ -46,9 +51,9 @@ public abstract class BaseLibWebActivity extends BaseLibActivity {
     @Override
     protected void initView() {
         super.initView();
-        mWebView = findViewById(R.id.web);
-        mX5WebView = findViewById(R.id.web_x5);
-        mWebProgress = findViewById(R.id.web_progress);
+        mWebView = findViewById(R.id.lib_web);
+        mX5WebView = findViewById(R.id.lib_web_x5);
+        mWebProgress = findViewById(R.id.lib_web_progress);
         if (BaseLibApplication.isInitX5EnvironmentSuccess){
             initBaseX5WebView(mX5WebView);
         } else {
@@ -255,5 +260,22 @@ public abstract class BaseLibWebActivity extends BaseLibActivity {
 
     protected void onBaseActivityResult(int requestCode, int resultCode, Intent data){
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (BaseLibApplication.isInitX5EnvironmentSuccess){
+            if (mX5WebView.canGoBack()) {
+                mX5WebView.goBack();
+            } else {
+                super.onBackPressed();
+            }
+        } else {
+            if (mWebView.canGoBack()) {
+                mWebView.goBack();
+            } else {
+                super.onBackPressed();
+            }
+        }
     }
 }

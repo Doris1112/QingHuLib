@@ -32,7 +32,7 @@ import okhttp3.Response;
  **/
 public abstract class IOkHttpManager {
 
-    private static final String TAG = IOkHttpManager.class.getSimpleName();
+    private static final String TAG = "QingHuShiDai";
 
     /**
      * api

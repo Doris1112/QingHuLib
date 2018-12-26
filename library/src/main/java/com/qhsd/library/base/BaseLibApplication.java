@@ -18,7 +18,7 @@ import java.io.File;
 
 public class BaseLibApplication extends MultiDexApplication {
 
-    protected static final String TAG = "qhsd";
+    protected static final String TAG = "QingHuShiDai";
 
     public static boolean isInitX5EnvironmentSuccess;
 
