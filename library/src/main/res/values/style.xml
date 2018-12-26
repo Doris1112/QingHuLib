@@ -38,6 +38,15 @@
         <item name="android:background">@drawable/lib_selector_btn</item>
     </style>
 
+    <style name="lib_WrapContentWH">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="lib_WrapContentWHNoPadding" parent="lib_WrapContentWH">
+        <item name="android:includeFontPadding">false</item>
+    </style>
+
     <style name="lib_DefaultRow">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">@dimen/dp_40</item>
@@ -46,12 +55,30 @@
         <item name="android:orientation">horizontal</item>
     </style>
 
-    <style name="lib_WrapContentWH">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
+    <style name="lib_DefaultRowLeftIcon">
+        <item name="android:layout_width">@dimen/dp_20</item>
+        <item name="android:layout_height">@dimen/dp_20</item>
+        <item name="android:layout_marginLeft">@dimen/dp_10</item>
     </style>
 
-    <style name="lib_WrapContentWHNoPadding" parent="lib_WrapContentWH">
-        <item name="android:includeFontPadding">false</item>
+    <style name="lib_DefaultRowLeftTitle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:layout_marginLeft">@dimen/dp_10</item>
+        <item name="android:textColor">@color/gray_3</item>
+        <item name="android:textSize">@dimen/text_size_15</item>
+    </style>
+
+    <style name="lib_DefaultRowRightText" parent="lib_WrapContentWH">
+        <item name="android:textColor">@color/gray_9</item>
+        <item name="android:textSize">@dimen/text_size_15</item>
+        <item name="android:layout_marginRight">@dimen/dp_10</item>
+    </style>
+
+    <style name="lib_DefaultRowRightIcon" parent="lib_WrapContentWH">
+        <item name="android:src">@drawable/lib_ic_arrow_right</item>
+        <item name="android:layout_marginRight">@dimen/dp_10</item>
     </style>
 </resources>
