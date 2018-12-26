@@ -77,11 +77,13 @@ public class ApkUpdateUtils implements OkHttpDownloadBack {
             view.findViewById(R.id.lib_update_apk_sure).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    dialog.dismiss();
                     if (!isDownloading(downloadUrl)){
-                        mDownloadUrls.add(downloadUrl);
-                        httpManager.downloadFile(downloadUrl, fileName, ApkUpdateUtils.this);
-                        dialog.dismiss();
-                        downloadDialog();
+                        if (httpManager != null){
+                            mDownloadUrls.add(downloadUrl);
+                            httpManager.downloadFile(downloadUrl, fileName, ApkUpdateUtils.this);
+                            downloadDialog();
+                        }
                     }
                 }
             });

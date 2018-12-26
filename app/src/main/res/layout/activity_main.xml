@@ -1,50 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:clipToPadding="true"
-    android:fitsSystemWindows="true"
-    android:gravity="center"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/button1"
-        style="@style/lib_DefaultBtn"
-        android:onClick="onMainViewClick"
-        android:text="Toast" />
-
-    <Button
-        android:id="@+id/button2"
-        style="@style/lib_DefaultBtn"
-        android:layout_margin="@dimen/dp_10"
-        android:onClick="onMainViewClick"
-        android:text="ProgressDialog" />
-
-    <Button
-        android:id="@+id/button3"
-        style="@style/lib_DefaultBtn"
-        android:layout_margin="@dimen/dp_10"
-        android:onClick="onMainViewClick"
-        android:text="Main2" />
-
-    <Button
-        android:id="@+id/button4"
-        style="@style/lib_DefaultBtn"
-        android:layout_margin="@dimen/dp_10"
-        android:onClick="onMainViewClick"
-        android:text="Web" />
-
-    <Button
-        android:id="@+id/button5"
-        style="@style/lib_DefaultBtn"
-        android:layout_margin="@dimen/dp_10"
-        android:onClick="onMainViewClick"
-        android:text="Image" />
-
-    <ImageView
-        android:id="@+id/image1"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:contentDescription="@string/app_name" />
+        android:layout_marginTop="@dimen/dp_16"
+        android:clipToPadding="true"
+        android:fitsSystemWindows="true"
+        android:gravity="center"
+        android:orientation="vertical">
 
-</LinearLayout>
+        <Button
+            android:id="@+id/button1"
+            style="@style/lib_DefaultBtn"
+            android:layout_margin="@dimen/dp_10"
+            android:onClick="onMainViewClick"
+            android:text="Toast" />
+
+        <Button
+            android:id="@+id/button2"
+            style="@style/lib_DefaultBtn"
+            android:layout_margin="@dimen/dp_10"
+            android:onClick="onMainViewClick"
+            android:text="ProgressDialog" />
+
+        <Button
+            android:id="@+id/button3"
+            style="@style/lib_DefaultBtn"
+            android:layout_margin="@dimen/dp_10"
+            android:onClick="onMainViewClick"
+            android:text="Main2" />
+
+        <Button
+            android:id="@+id/button4"
+            style="@style/lib_DefaultBtn"
+            android:layout_margin="@dimen/dp_10"
+            android:onClick="onMainViewClick"
+            android:text="Web" />
+
+        <Button
+            android:id="@+id/button5"
+            style="@style/lib_DefaultBtn"
+            android:layout_margin="@dimen/dp_10"
+            android:onClick="onMainViewClick"
+            android:text="Image" />
+
+        <ImageView
+            android:id="@+id/image1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/app_name" />
+
+        <Button
+            android:id="@+id/button6"
+            style="@style/lib_DefaultBtn"
+            android:layout_margin="@dimen/dp_10"
+            android:onClick="onMainViewClick"
+            android:text="DialogContact" />
+
+        <Button
+            android:id="@+id/button7"
+            style="@style/lib_DefaultBtn"
+            android:layout_margin="@dimen/dp_10"
+            android:onClick="onMainViewClick"
+            android:text="DialogContact1" />
+    </LinearLayout>
+</ScrollView>

@@ -2,11 +2,9 @@ package com.qhsd.library.utils;
 
 import android.app.Activity;
 import android.app.Dialog;
-import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
-import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.qhsd.library.R;
@@ -15,7 +13,7 @@ import com.qhsd.library.R;
  * @author Doris
  * @date 2018/12/13
  **/
-public class CommonDialogUtils {
+public class DialogCommonUtils {
 
     /**
      * 按钮点击回调

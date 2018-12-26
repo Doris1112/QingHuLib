@@ -11,7 +11,7 @@ import com.qhsd.library.config.BaseNumber;
 import com.qhsd.library.helper.CountDownHelper;
 import com.qhsd.library.popup.LimitPopupWindow;
 import com.qhsd.library.popup.TypePopupWindow;
-import com.qhsd.library.utils.CommonDialogUtils;
+import com.qhsd.library.utils.DialogCommonUtils;
 import com.qhsd.library.utils.ToastUtils;
 
 /**
@@ -66,9 +66,9 @@ public class Main2Activity extends AppCompatActivity {
                 }
                 countDownHelper.start();
             case R.id.button3:
-                CommonDialogUtils.showDialog(this,
+                DialogCommonUtils.showDialog(this,
                         "提示", "显示是否正确？",
-                        new CommonDialogUtils.CommonDialogCallback() {
+                        new DialogCommonUtils.CommonDialogCallback() {
                             @Override
                             public void onClick() {
                                 ToastUtils.showToastCenter(Main2Activity.this, "正确");

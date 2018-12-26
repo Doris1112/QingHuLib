@@ -38,13 +38,13 @@
 
     <TextView
         android:id="@+id/lib_update_apk_sure"
-        android:layout_height="0dp"
         android:layout_width="match_parent"
+        android:layout_height="0dp"
         android:layout_weight="1"
+        android:background="@drawable/lib_selector_dialog_btn_bottom"
         android:gravity="center"
         android:padding="@dimen/dp_10"
         android:text="@string/lib_sure"
         android:textColor="@color/default_color"
         android:textSize="@dimen/text_size_17" />
-
 </LinearLayout>

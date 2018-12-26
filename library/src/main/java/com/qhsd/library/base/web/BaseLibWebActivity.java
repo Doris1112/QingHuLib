@@ -197,10 +197,14 @@ public class BaseLibWebActivity extends BaseLibActivity {
     protected void setWebUrl(String url){
         if (BaseLibApplication.isInitX5EnvironmentSuccess){
             Log.d(TAG, "setWebUrl: isInitX5EnvironmentSuccess = true");
-            mX5WebView.loadUrl(url);
+            if (mX5WebView != null){
+                mX5WebView.loadUrl(url);
+            }
         } else {
             Log.d(TAG, "setWebUrl: isInitX5EnvironmentSuccess = false");
-            mWebView.loadUrl(url);
+            if (mWebView != null){
+                mWebView.loadUrl(url);
+            }
         }
     }
 
@@ -265,13 +269,13 @@ public class BaseLibWebActivity extends BaseLibActivity {
     @Override
     public void onBackPressed() {
         if (BaseLibApplication.isInitX5EnvironmentSuccess){
-            if (mX5WebView.canGoBack()) {
+            if (mX5WebView != null && mX5WebView.canGoBack()) {
                 mX5WebView.goBack();
             } else {
                 super.onBackPressed();
             }
         } else {
-            if (mWebView.canGoBack()) {
+            if (mWebView != null && mWebView.canGoBack()) {
                 mWebView.goBack();
             } else {
                 super.onBackPressed();

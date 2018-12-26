@@ -8,7 +8,9 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.qhsd.library.utils.DialogContactUtils;
 import com.qhsd.library.utils.ImageUtils;
+import com.qhsd.library.utils.PhoneUtils;
 import com.qhsd.library.utils.ProgressDialogUtils;
 import com.qhsd.library.utils.ToastUtils;
 
@@ -33,7 +35,6 @@ public class MainActivity extends AppCompatActivity {
         switch (view.getId()) {
             case R.id.button1:
                 ToastUtils.showToastCenter(this, "123");
-                ProgressDialogUtils.showDialog(this, "检查中...");
                 break;
             case R.id.button2:
                 ProgressDialogUtils.showDialog(this);
@@ -54,6 +55,35 @@ public class MainActivity extends AppCompatActivity {
                         Log.d("doris", "onGet: " + width + "_" + height);
                     }
                 });
+                break;
+            case R.id.button6:
+                DialogContactUtils.showDialog(this, R.mipmap.ic_launcher, "微信客服：",
+                        "bbdaikuan", "复制",
+                        new DialogContactUtils.DialogContactCallback() {
+                            @Override
+                            public void onClick(String contentStr) {
+                                PhoneUtils.copyText(MainActivity.this, contentStr);
+                                ToastUtils.showToastCenter(MainActivity.this, "复制成功！");
+                            }
+                        });
+                break;
+            case R.id.button7:
+                DialogContactUtils.showDialog(this, 0,
+                        "微信客服：", "bbdaikuan", "复制",
+                        new DialogContactUtils.DialogContactCallback() {
+                            @Override
+                            public void onClick(String contentStr) {
+                                PhoneUtils.copyText(MainActivity.this, contentStr);
+                                ToastUtils.showToastCenter(MainActivity.this, "复制成功！");
+                            }
+                        }, 0,
+                        "联系电话：", "1321906677", "呼叫",
+                        new DialogContactUtils.DialogContactCallback() {
+                            @Override
+                            public void onClick(String contentStr) {
+                                PhoneUtils.callPhone(MainActivity.this, contentStr);
+                            }
+                        });
                 break;
             default:
                 break;
