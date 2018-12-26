@@ -77,7 +77,9 @@
         <item name="android:layout_marginRight">@dimen/dp_10</item>
     </style>
 
-    <style name="lib_DefaultRowRightIcon" parent="lib_WrapContentWH">
+    <style name="lib_DefaultRowRightIcon">
+        <item name="android:layout_width">@dimen/dp_8</item>
+        <item name="android:layout_height">@dimen/dp_18</item>
         <item name="android:src">@drawable/lib_ic_arrow_right</item>
         <item name="android:layout_marginRight">@dimen/dp_10</item>
     </style>
