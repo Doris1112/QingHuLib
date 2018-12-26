@@ -18,7 +18,7 @@ public class DialogCommonUtils {
     /**
      * 按钮点击回调
      */
-    public interface CommonDialogCallback {
+    public interface Callback {
 
         /**
          * 点击事件
@@ -34,7 +34,7 @@ public class DialogCommonUtils {
      * @param contentStr 内容
      * @param callback   回调
      */
-    public static void showDialog(Activity activity, String titleStr, String contentStr, final CommonDialogCallback callback) {
+    public static void showDialog(Activity activity, String titleStr, String contentStr, final Callback callback) {
         View view = getView(activity, titleStr, contentStr);
         final Dialog dialog = getDialog(activity, view);
         view.findViewById(R.id.lib_common_cancel).setOnClickListener(new View.OnClickListener() {

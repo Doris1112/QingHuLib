@@ -22,7 +22,7 @@ public class DialogContactUtils {
     /**
      * 按钮点击回调
      */
-    public interface DialogContactCallback {
+    public interface Callback {
         /**
          * 点击事件
          *
@@ -42,7 +42,7 @@ public class DialogContactUtils {
      * @param callback     回调
      */
     public static void showDialog(Activity activity, int iconRes, String titleStr, final String contentStr, String operationStr,
-                                  final DialogContactCallback callback) {
+                                  final Callback callback) {
         View view = getView(activity, iconRes, 0, titleStr, contentStr, operationStr);
         final Dialog dialog = getDialog(activity, view);
         view.findViewById(R.id.lib_contact_operation1).setOnClickListener(new View.OnClickListener() {
@@ -72,9 +72,9 @@ public class DialogContactUtils {
      * @param callback2     回调2
      */
     public static void showDialog(Activity activity, int iconRes1, String titleStr1, final String contentStr1, String operationStr1,
-                                  final DialogContactCallback callback1,
+                                  final Callback callback1,
                                   int iconRes2, String titleStr2, final String contentStr2, String operationStr2,
-                                  final DialogContactCallback callback2) {
+                                  final Callback callback2) {
         View view = getView(activity, iconRes1, iconRes2, titleStr1, contentStr1, operationStr1,
                 titleStr2, contentStr2, operationStr2);
         final Dialog dialog = getDialog(activity, view);
