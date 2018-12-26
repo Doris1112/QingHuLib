@@ -68,7 +68,7 @@ public class Main2Activity extends AppCompatActivity {
             case R.id.button3:
                 DialogCommonUtils.showDialog(this,
                         "提示", "显示是否正确？",
-                        new DialogCommonUtils.CommonDialogCallback() {
+                        new DialogCommonUtils.Callback() {
                             @Override
                             public void onClick() {
                                 ToastUtils.showToastCenter(Main2Activity.this, "正确");

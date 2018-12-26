@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
             case R.id.button6:
                 DialogContactUtils.showDialog(this, R.mipmap.ic_launcher, "微信客服：",
                         "bbdaikuan", "复制",
-                        new DialogContactUtils.DialogContactCallback() {
+                        new DialogContactUtils.Callback() {
                             @Override
                             public void onClick(String contentStr) {
                                 PhoneUtils.copyText(MainActivity.this, contentStr);
@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
             case R.id.button7:
                 DialogContactUtils.showDialog(this, 0,
                         "微信客服：", "bbdaikuan", "复制",
-                        new DialogContactUtils.DialogContactCallback() {
+                        new DialogContactUtils.Callback() {
                             @Override
                             public void onClick(String contentStr) {
                                 PhoneUtils.copyText(MainActivity.this, contentStr);
@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
                             }
                         }, 0,
                         "联系电话：", "1321906677", "呼叫",
-                        new DialogContactUtils.DialogContactCallback() {
+                        new DialogContactUtils.Callback() {
                             @Override
                             public void onClick(String contentStr) {
                                 PhoneUtils.callPhone(MainActivity.this, contentStr);

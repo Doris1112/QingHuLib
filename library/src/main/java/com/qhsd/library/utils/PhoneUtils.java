@@ -125,7 +125,7 @@ public class PhoneUtils {
         }
         DialogCommonUtils.showDialog(activity, "系统通知",
                 "检测到您没有打开通知栏权限，是否去打开？",
-                new DialogCommonUtils.CommonDialogCallback() {
+                new DialogCommonUtils.Callback() {
                     @Override
                     public void onClick() {
                         Intent localIntent = new Intent();
