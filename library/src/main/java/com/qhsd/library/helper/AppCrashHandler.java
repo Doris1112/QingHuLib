@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 
+import com.qhsd.library.R;
 import com.qhsd.library.utils.LogUtils;
 
 /**
@@ -60,7 +61,8 @@ public class AppCrashHandler implements Thread.UncaughtExceptionHandler {
             PackageManager pm = ctx.getPackageManager();
             PackageInfo pi = pm.getPackageInfo(ctx.getPackageName(), PackageManager.GET_ACTIVITIES);
             if (pi != null) {
-                LogUtils.getInstance().writeLog("程序崩溃！版本号:　" + pi.versionName, ex);
+                LogUtils.getInstance().writeLog(ctx.getString(R.string.app_name) +
+                        "-程序崩溃！版本号:　" + pi.versionName, ex);
                 ex.printStackTrace();
             }
         } catch (Exception e) {
