@@ -206,6 +206,15 @@ public abstract class BaseLibActivity extends AppCompatActivity {
     }
 
     /**
+     * 隐藏右边按钮
+     */
+    protected final void setRightBtnGone(){
+        if (mRightLayout != null){
+            mRightLayout.setVisibility(View.GONE);
+        }
+    }
+
+    /**
      * 设置标题下边线条显示
      */
     protected final void setTitleLineVisible(){
