@@ -4,15 +4,21 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ScrollView;
 
 import com.bumptech.glide.Glide;
+import com.qhsd.library.popup.ChooseListPopupWindow;
 import com.qhsd.library.utils.DialogContactUtils;
 import com.qhsd.library.utils.ImageUtils;
 import com.qhsd.library.utils.PhoneUtils;
 import com.qhsd.library.utils.ProgressDialogUtils;
 import com.qhsd.library.utils.ToastUtils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Doris
@@ -22,13 +28,25 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String IMAGE_PATH = "http://i2.houputech.com/upload/bbd/adverts/82ab5dac0817473d98413893c75bd7dc.png";
     private ImageView imageView;
+    private List<String> list = new ArrayList<>(8);
+    private ScrollView scrollView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        scrollView = findViewById(R.id.main_scroll);
         imageView = findViewById(R.id.image1);
+
+        list.add("仅一次");
+        list.add("每个月");
+        list.add("每2个月");
+        list.add("每3个月");
+        list.add("每4个月");
+        list.add("每5个月");
+        list.add("每半年");
+        list.add("每年");
     }
 
     public void onMainViewClick(View view) {
@@ -84,6 +102,16 @@ public class MainActivity extends AppCompatActivity {
                                 PhoneUtils.callPhone(MainActivity.this, contentStr);
                             }
                         });
+                break;
+            case R.id.button8:
+                ChooseListPopupWindow popupWindow = new ChooseListPopupWindow(this, list);
+                popupWindow.setOnItemClickListener(new ChooseListPopupWindow.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(String data, int position) {
+                        Log.d("Doris", "onItemClick: " + data + "_" + position);
+                    }
+                });
+                popupWindow.showAtLocation(scrollView, Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
                 break;
             default:
                 break;

@@ -4,14 +4,15 @@
     <string name="lib_version_update">版本更新</string>
     <string name="lib_version_update_content">更新内容</string>
     <string name="lib_download_progress">下载进度</string>
+
     <string name="lib_sure">确认</string>
     <string name="lib_cancel">取消</string>
+
     <string name="lib_data_empty">暂无相关内容</string>
     <string name="lib_data_no_more">没有更多了</string>
     <string name="lib_net_error">网络不给力，点击重试</string>
     <string name="lib_loading">努力加载中……</string>
-    <string name="lib_take_photo">拍照</string>
-    <string name="lib_choose_form_storage">从相册中选择</string>
+
     <string name="lib_all">所有</string>
     <string name="lib_less_than_two_thousand">2000以内</string>
     <string name="lib_two_thousand_ten_thousand">2000&#8211;10000</string>
@@ -20,5 +21,6 @@
     <string name="lib_credit_loan">信用贷</string>
     <string name="lib_large_loan">大额贷</string>
     <string name="lib_wage_loan">工薪贷</string>
+
     <string name="lib_delete">删除</string>
 </resources>
