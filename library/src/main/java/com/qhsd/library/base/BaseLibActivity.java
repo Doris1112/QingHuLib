@@ -168,7 +168,7 @@ public abstract class BaseLibActivity extends AppCompatActivity {
 
     /**
      * 设置标题颜色
-     * @param color 颜色
+     * @param color 颜色值
      */
     protected final void setBaseTitleColor(int color){
         if (mTitleView != null) {
@@ -188,6 +188,16 @@ public abstract class BaseLibActivity extends AppCompatActivity {
             mRightText.setVisibility(View.VISIBLE);
             mRightText.setText(text);
             mRightText.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
+        }
+    }
+
+    /**
+     * 设置右边文字颜色
+     * @param color 颜色值
+     */
+    protected final void setRightTextColor(int color){
+        if (mRightText != null){
+            mRightText.setTextColor(color);
         }
     }
 
@@ -221,6 +231,16 @@ public abstract class BaseLibActivity extends AppCompatActivity {
     protected final void setRightBtnGone(){
         if (mRightLayout != null){
             mRightLayout.setVisibility(View.GONE);
+        }
+    }
+
+    /**
+     * 设置线条颜色
+     * @param color 颜色值
+     */
+    protected final void setTitleLineColor(int color){
+        if (mTitleLine != null){
+            mTitleLine.setBackgroundColor(color);
         }
     }
 

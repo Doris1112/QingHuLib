@@ -231,6 +231,16 @@ public abstract class BaseLibFragment extends Fragment {
     }
 
     /**
+     * 设置右边文字颜色
+     * @param color 颜色值
+     */
+    protected final void setRightTextColor(int color){
+        if (mRightText != null){
+            mRightText.setTextColor(color);
+        }
+    }
+
+    /**
      * 设置右边图片
      * @param drawable 图片
      */
@@ -260,6 +270,16 @@ public abstract class BaseLibFragment extends Fragment {
     protected final void setRightBtnGone(){
         if (mRightLayout != null){
             mRightLayout.setVisibility(View.GONE);
+        }
+    }
+
+    /**
+     * 设置线条颜色
+     * @param color 颜色值
+     */
+    protected final void setTitleLineColor(int color){
+        if (mTitleLine != null){
+            mTitleLine.setBackgroundColor(color);
         }
     }
 
