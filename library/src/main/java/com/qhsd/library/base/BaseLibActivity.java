@@ -160,9 +160,19 @@ public abstract class BaseLibActivity extends AppCompatActivity {
      *
      * @param title 标题
      */
-    protected final void setTitle(String title) {
+    protected final void setBaseTitle(String title) {
         if (mTitleView != null) {
             mTitleView.setText(title);
+        }
+    }
+
+    /**
+     * 设置标题颜色
+     * @param color 颜色
+     */
+    protected final void setBaseTitleColor(int color){
+        if (mTitleView != null) {
+            mTitleView.setTextColor(color);
         }
     }
 
