@@ -199,9 +199,19 @@ public abstract class BaseLibFragment extends Fragment {
      *
      * @param title 标题
      */
-    protected final void setTitle(String title) {
+    protected final void setBaseTitle(String title) {
         if (mTitleView != null) {
             mTitleView.setText(title);
+        }
+    }
+
+    /**
+     * 设置标题颜色
+     * @param color 颜色
+     */
+    protected final void setBaseTitleColor(int color){
+        if (mTitleView != null) {
+            mTitleView.setTextColor(color);
         }
     }
 
@@ -241,6 +251,15 @@ public abstract class BaseLibFragment extends Fragment {
     protected void setRightBtnOnClick(View.OnClickListener onClickListener) {
         if (mRightLayout != null){
             mRightLayout.setOnClickListener(onClickListener);
+        }
+    }
+
+    /**
+     * 隐藏右边按钮
+     */
+    protected final void setRightBtnGone(){
+        if (mRightLayout != null){
+            mRightLayout.setVisibility(View.GONE);
         }
     }
 
