@@ -32,6 +32,9 @@ public class ProductsDetails {
     private List<String> Extend7Convert;
     private String Extend8;
     private String Extend9;
+    private String Extend10;
+    private String Extend11;
+    private String Extend12;
     private boolean NeedUnionLogin;
     private boolean IsRecommend;
     private String BrowseTime;
@@ -218,6 +221,30 @@ public class ProductsDetails {
 
     public void setExtend9(String extend9) {
         Extend9 = extend9;
+    }
+
+    public String getExtend10() {
+        return Extend10;
+    }
+
+    public void setExtend10(String extend10) {
+        Extend10 = extend10;
+    }
+
+    public String getExtend11() {
+        return Extend11;
+    }
+
+    public void setExtend11(String extend11) {
+        Extend11 = extend11;
+    }
+
+    public String getExtend12() {
+        return Extend12;
+    }
+
+    public void setExtend12(String extend12) {
+        Extend12 = extend12;
     }
 
     public boolean isNeedUnionLogin() {
