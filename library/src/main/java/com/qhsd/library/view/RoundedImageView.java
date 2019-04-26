@@ -1,10 +1,12 @@
 package com.qhsd.library.view;
 
+import android.app.Activity;
 import android.content.Context;
 import android.util.AttributeSet;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.squareup.picasso.Picasso;
 
 /**
  * @author Doris.
@@ -25,11 +27,38 @@ public class RoundedImageView extends com.makeramen.roundedimageview.RoundedImag
     }
 
     public void setImage(String path) {
-        Glide.with(getContext()).load(path).into(this);
+        try {
+            Glide.with(getContext()).load(path).into(this);
+        } catch (Exception e){
+            picassoLoadImage(path);
+        }
     }
 
     public void setImage(String path, RequestOptions options) {
-        Glide.with(getContext()).load(path).apply(options).into(this);
+        try {
+            Glide.with(getContext()).load(path).apply(options).into(this);
+        } catch (Exception e){
+            picassoLoadImage(path, options.getPlaceholderId(), options.getErrorId());
+        }
+    }
+
+    public void picassoLoadImage(String path) {
+        try {
+            Picasso.get().load(path).into(this);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public void picassoLoadImage(String path, int placeholderRes, int errorRes) {
+        try {
+            Picasso.get().load(path)
+                    .placeholder(placeholderRes)
+                    .error(errorRes)
+                    .into(this);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
 }

@@ -8,6 +8,7 @@ import com.bigkoo.convenientbanner.holder.Holder;
 import com.bumptech.glide.Glide;
 import com.qhsd.library.R;
 import com.qhsd.library.entity.api.Banner;
+import com.squareup.picasso.Picasso;
 
 /**
  * @author Doris.
@@ -44,7 +45,11 @@ public class BaseBannerAdapter implements CBViewHolderCreator {
             try {
                 Glide.with(mImageView.getContext()).load(data.getImage()).into(mImageView);
             } catch (Exception e) {
-                e.printStackTrace();
+                try {
+                    Picasso.get().load(data.getImage()).into(mImageView);
+                } catch (Exception e1){
+                    e1.printStackTrace();
+                }
             }
         }
     }
