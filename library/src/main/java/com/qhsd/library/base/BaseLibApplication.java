@@ -1,5 +1,7 @@
 package com.qhsd.library.base;
 
+import android.app.ActivityManager;
+import android.content.Context;
 import android.os.Environment;
 import android.support.multidex.MultiDexApplication;
 import android.util.Log;
@@ -28,13 +30,16 @@ public class BaseLibApplication extends MultiDexApplication {
     @Override
     public void onCreate() {
         super.onCreate();
-        // 捕获异常帮助类
-        AppCrashHandler.getInstance().init(this);
-        // 适配 需要传入ui设计给的大小,初始化
-        if (ScreenUtils.getScreenWidth(this) < mScreenWidth) {
-            new ScreenAdaptation(this, mScreenWidth, mScreenHeight).register();
+
+        if (getApplicationInfo().packageName.equals(getCurProcessName(getApplicationContext()))) {
+            // 捕获异常帮助类
+            AppCrashHandler.getInstance().init(this);
+            // 适配 需要传入ui设计给的大小,初始化
+            if (ScreenUtils.getScreenWidth(this) < mScreenWidth) {
+                new ScreenAdaptation(this, mScreenWidth, mScreenHeight).register();
+            }
+            initX5WebCore();
         }
-        initX5WebCore();
     }
 
     private void initX5WebCore(){
@@ -70,5 +75,18 @@ public class BaseLibApplication extends MultiDexApplication {
             }
         }
         return downloadSavePath;
+    }
+
+    public static String getCurProcessName(Context context) {
+        int pid = android.os.Process.myPid();
+        ActivityManager activityManager = (ActivityManager) context
+                .getSystemService(Context.ACTIVITY_SERVICE);
+        for (ActivityManager.RunningAppProcessInfo appProcess : activityManager
+                .getRunningAppProcesses()) {
+            if (appProcess.pid == pid) {
+                return appProcess.processName;
+            }
+        }
+        return null;
     }
 }
