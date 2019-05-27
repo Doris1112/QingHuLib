@@ -86,10 +86,6 @@ public class BaseLibWebActivity extends BaseLibActivity {
         // 为防止键盘弹出挡住页面
         AndroidStatusBugWorkaround.assistActivity(this);
 
-        if (mX5WebView != null){
-            mX5WebView.setVisibility(View.GONE);
-        }
-        webView.setVisibility(View.VISIBLE);
         webView.clearCache(true);
         webView.clearHistory();
         webView.clearFormData();
@@ -166,10 +162,6 @@ public class BaseLibWebActivity extends BaseLibActivity {
             return;
         }
 
-        if (mWebView != null){
-            mWebView.setVisibility(View.GONE);
-        }
-        webView.setVisibility(View.VISIBLE);
         webView.clearCache(true);
         webView.clearHistory();
         webView.clearFormData();
