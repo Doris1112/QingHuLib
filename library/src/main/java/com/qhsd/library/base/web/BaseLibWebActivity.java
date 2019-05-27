@@ -35,10 +35,13 @@ public class BaseLibWebActivity extends BaseLibActivity {
     protected CustomWebChromeClient mWebChromeClient;
     protected CustomX5WebChromeClient mX5WebChromeClient;
 
+    private boolean mIsX5 = true;
+
     @Override
     protected int getLayoutResId() {
         return R.layout.lib_layout_web;
     }
+
 
     @Override
     protected void initViewBefore() {
@@ -46,6 +49,7 @@ public class BaseLibWebActivity extends BaseLibActivity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         }
+        mIsX5 = getIntent().getBooleanExtra("isX5", mIsX5);
     }
 
     @Override
@@ -194,7 +198,7 @@ public class BaseLibWebActivity extends BaseLibActivity {
     }
 
     protected void setWebUrl(String url){
-        if (BaseLibApplication.isInitX5EnvironmentSuccess){
+        if (BaseLibApplication.isInitX5EnvironmentSuccess && mIsX5){
             Log.d(TAG, "setWebUrl: isInitX5EnvironmentSuccess = true");
             if (mX5WebView != null){
                 mX5WebView.loadUrl(url);
