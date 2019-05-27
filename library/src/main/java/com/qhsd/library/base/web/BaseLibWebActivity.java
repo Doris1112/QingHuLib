@@ -56,9 +56,8 @@ public class BaseLibWebActivity extends BaseLibActivity {
         mWebProgress = findViewById(R.id.lib_web_progress);
         if (BaseLibApplication.isInitX5EnvironmentSuccess){
             initBaseX5WebView(mX5WebView);
-        } else {
-            initBaseWebView(mWebView);
         }
+        initBaseWebView(mWebView);
     }
 
     /**
@@ -202,9 +201,9 @@ public class BaseLibWebActivity extends BaseLibActivity {
             }
         } else {
             Log.d(TAG, "setWebUrl: isInitX5EnvironmentSuccess = false");
-            if (mWebView != null){
-                mWebView.loadUrl(url);
-            }
+        }
+        if (mWebView != null){
+            mWebView.loadUrl(url);
         }
     }
 
