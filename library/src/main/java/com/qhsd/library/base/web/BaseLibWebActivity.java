@@ -35,7 +35,7 @@ public class BaseLibWebActivity extends BaseLibActivity {
     protected CustomWebChromeClient mWebChromeClient;
     protected CustomX5WebChromeClient mX5WebChromeClient;
 
-    private boolean mIsX5 = true;
+    protected boolean mIsX5 = true;
 
     @Override
     protected int getLayoutResId() {
