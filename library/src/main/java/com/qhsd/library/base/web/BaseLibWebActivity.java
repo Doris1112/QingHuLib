@@ -20,6 +20,7 @@ import com.qhsd.library.config.BaseNumber;
 import com.qhsd.library.helper.AndroidStatusBugWorkaround;
 import com.qhsd.library.utils.ToastUtils;
 import com.tencent.smtt.export.external.extension.interfaces.IX5WebViewExtension;
+import com.tencent.smtt.sdk.DownloadListener;
 
 /**
  * @author Doris.
@@ -36,6 +37,9 @@ public class BaseLibWebActivity extends BaseLibActivity {
     protected CustomX5WebChromeClient mX5WebChromeClient;
 
     protected boolean mIsX5 = true;
+    protected String mTitle, mUrl, mDownloadApkUrl;
+    protected static final String GET_WRITE_PERMISSION_DOWNLOAD = "download";
+    protected String mGetWritePermission;
 
     @Override
     protected int getLayoutResId() {
@@ -50,18 +54,24 @@ public class BaseLibWebActivity extends BaseLibActivity {
             getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         }
         mIsX5 = getIntent().getBooleanExtra("isX5", mIsX5);
+        mUrl = getIntent().getStringExtra("url");
+        mTitle = getIntent().getStringExtra("title");
     }
 
     @Override
     protected void initView() {
         super.initView();
+        if (mUrl.isEmpty()) {
+            ToastUtils.showToastCenter(this, "跳转链接错误！");
+            finish();
+        }
         mWebView = findViewById(R.id.lib_web);
         mX5WebView = findViewById(R.id.lib_web_x5);
         mWebProgress = findViewById(R.id.lib_web_progress);
-        if (BaseLibApplication.isInitX5EnvironmentSuccess){
-            initBaseX5WebView(mX5WebView);
-        }
+        initBaseX5WebView(mX5WebView);
         initBaseWebView(mWebView);
+        setBaseTitle(mTitle);
+        setWebUrl(mUrl);
     }
 
     /**
@@ -120,6 +130,22 @@ public class BaseLibWebActivity extends BaseLibActivity {
         mWebChromeClient = getCustomWebChromeClient();
         webView.setWebChromeClient(mWebChromeClient);
         webView.setWebViewClient(getCustomWebViewClient());
+
+        mWebView.setDownloadListener(new android.webkit.DownloadListener() {
+            @Override
+            public void onDownloadStart(final String url, String userAgent,
+                                        String contentDisposition, String mimeType,
+                                        long contentLength) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        mDownloadApkUrl = url;
+                        Log.d(TAG, "onDownloadStart: mWebView-" + mDownloadApkUrl);
+                        initPermissionForWriteExternalStorage(GET_WRITE_PERMISSION_DOWNLOAD);
+                    }
+                });
+            }
+        });
     }
 
     protected CustomWebChromeClient getCustomWebChromeClient(){
@@ -187,6 +213,20 @@ public class BaseLibWebActivity extends BaseLibActivity {
         mX5WebChromeClient = getCustomX5WebChromeClient();
         webView.setWebChromeClient(mX5WebChromeClient);
         webView.setWebViewClient(getCustomX5WebViewClient());
+
+        mX5WebView.setDownloadListener(new DownloadListener() {
+            @Override
+            public void onDownloadStart(final String s, String s1, String s2, String s3, long l) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        mDownloadApkUrl = s;
+                        Log.d(TAG, "onDownloadStart: mX5WebView-" + mDownloadApkUrl);
+                        initPermissionForWriteExternalStorage(GET_WRITE_PERMISSION_DOWNLOAD);
+                    }
+                });
+            }
+        });
     }
 
     protected CustomX5WebChromeClient getCustomX5WebChromeClient(){
@@ -199,22 +239,29 @@ public class BaseLibWebActivity extends BaseLibActivity {
 
     protected void setWebUrl(String url){
         if (BaseLibApplication.isInitX5EnvironmentSuccess && mIsX5){
-            Log.d(TAG, "setWebUrl: isInitX5EnvironmentSuccess = true");
+            Log.d(TAG, "initWeb: X5");
             if (mX5WebView != null){
                 mX5WebView.loadUrl(url);
             }
+            if (mWebView != null){
+                mWebView.setVisibility(View.GONE);
+            }
         } else {
-            Log.d(TAG, "setWebUrl: isInitX5EnvironmentSuccess = false");
-        }
-        if (mWebView != null){
-            mWebView.loadUrl(url);
+            Log.d(TAG, "initWeb: Default");
+            if (mWebView != null){
+                mWebView.loadUrl(url);
+            }
+            if (mX5WebView != null){
+                mX5WebView.setVisibility(View.GONE);
+            }
         }
     }
 
     /**
      * 获取读写权限
      */
-    protected final void initPermissionForWriteExternalStorage() {
+    protected final void initPermissionForWriteExternalStorage(String state) {
+        mGetWritePermission = state;
         int flag = ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
         if (PackageManager.PERMISSION_GRANTED != flag) {
             ActivityCompat.requestPermissions(this,
